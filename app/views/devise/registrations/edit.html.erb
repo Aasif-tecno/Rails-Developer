@@ -31,15 +31,26 @@
     <% end %>
   </div>
 
-  <div class="form-group">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+         <div class="form-group">
+     <%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
   </div>
 
   <div class="form-group">
     <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
     <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control" %>
   </div>
+
+  <h4> Roles</h4>
+  <div class="form-check">
+    <%= f.check_box :developer, class: "form-check-input"%>
+    <%= f.label :developer, "Use as Developer" , class: "form-check-label"%><br />
+  </div>
+
+  <div class="form-check mb-3">
+    <%= f.check_box :employer, class: "form-check-input"%>
+    <%= f.label :employer, "Use as Employer", class: "form-check-label" %><br />
+  </div> 
 
   <div class="form-group">
     <%= f.submit "Update" %>
