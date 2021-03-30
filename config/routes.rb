@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :jobs
   root 'home#index'
   devise_for :users
   mount SimpleDiscussion::Engine => "/forum"
