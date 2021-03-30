@@ -1,0 +1,21 @@
+We have processed your refund.<br/>
+Please allow up to 7 business days for your refund to appear in your account<br/>
+<br/>
+Questions? Please reply to this email.<br/>
+<br/>
+------------------------------------<br/>
+RECEIPT - REFUND<br/>
+<br/>
+Amount: USD <%= ActionController::Base.helpers.number_to_currency(params[:charge].amount / 100.0) %><br/>
+<br/>
+Refunded to: <%= params[:charge].charged_to %><br/>
+Transaction ID: <%= params[:charge].id %><br/>
+Date: <%= params[:charge].created_at %><br/>
+<% if params[:charge].owner.extra_billing_info? %>
+<%= params[:charge].owner.extra_billing_info %><br/>
+<% end %>
+<br/>
+<br/>
+<%= Pay.business_name %><br/>
+<%= simple_format Pay.business_address %>
+------------------------------------<br/>

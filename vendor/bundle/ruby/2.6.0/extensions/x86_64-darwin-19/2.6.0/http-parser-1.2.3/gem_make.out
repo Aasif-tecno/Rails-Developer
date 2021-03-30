@@ -1,0 +1,5 @@
+current directory: /Users/apple/Desktop/Aasif/railsDevelopers/vendor/bundle/ruby/2.6.0/gems/http-parser-1.2.3/ext
+/Users/apple/.rvm/rubies/ruby-2.6.3/bin/ruby -rrubygems /Users/apple/Desktop/Aasif/railsDevelopers/vendor/bundle/ruby/2.6.0/gems/rake-13.0.3/exe/rake RUBYARCHDIR\=/Users/apple/Desktop/Aasif/railsDevelopers/vendor/bundle/ruby/2.6.0/extensions/x86_64-darwin-19/2.6.0/http-parser-1.2.3 RUBYLIBDIR\=/Users/apple/Desktop/Aasif/railsDevelopers/vendor/bundle/ruby/2.6.0/extensions/x86_64-darwin-19/2.6.0/http-parser-1.2.3
+mkdir -p x86_64-darwin/http-parser
+gcc -fexceptions -O -fno-omit-frame-pointer -fno-strict-aliasing -Wall -Wextra -O3   -o x86_64-darwin/http-parser/http_parser.o -c ./http-parser/http_parser.c
+gcc -bundle -o x86_64-darwin/libhttp-parser-ext.bundle x86_64-darwin/http-parser/http_parser.o -fexceptions 
