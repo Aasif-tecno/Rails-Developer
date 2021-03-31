@@ -1,4 +1,4 @@
-<%= form_with(model: job) do |form| %>
+<%= simple_form_for(job) do |form| %>
   <% if job.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(job.errors.count, "error") %> prohibited this job from being saved:</h2>
@@ -11,62 +11,50 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
-  </div>
-
-  <div class="field">
-    <%= form.label :link_to_apply %>
-    <%= form.text_field :link_to_apply %>
-  </div>
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.rich_text_area :description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :company_name %>
-    <%= form.text_field :company_name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :company_website %>
-    <%= form.text_field :company_website %>
-  </div>
-
-  <div class="field">
-    <%= form.label :company_description %>
-    <%= form.rich_text_area :company_description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :role_type %>
-    <%= form.text_field :role_type %>
-  </div>
-
-  <div class="field">
-    <%= form.label :compersatino_range %>
-    <%= form.text_field :compersatino_range %>
-  </div>
-
-  <div class="field">
-    <%= form.label :remote %>
-    <%= form.check_box :remote %>
-  </div>
-
-  <div class="field">
-    <%= form.label :years_of_experience %>
-    <%= form.text_field :years_of_experience %>
-  </div>
-
-  <div class="field">
-    <%= form.label :user_id %>
-    <%= form.text_field :user_id %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
+  <div class="card">
+    <div class="card-body">
+      <%= form.input :title%>
+      <%= form.input :link_to_apply%>
+      <%= form.input :description,as: :rich_text_area %>
+      <%= form.input :company_name %>
+      <div class="row">
+        <div class="col-sm-6">
+          <%= form.input :headquarters %>
+        </div>
+        <div class="col-sm-6">
+          <%= form.input :company_website %>
+        </div>
+      </div>
+      <%= form.input:company_description ,as: :rich_text_area%>
+      <div class="row">
+        <div class="col-sm-4">
+          <%= form.label :compensation_type %>
+          <%= form.select :compensation_type, options_for_select(Job::COMPENSATION_TYPE),  { :include_blank=>false },class: "form-control" %>
+        </div>
+        <div class="col-sm-4">
+          <%= form.label :compensation_range %>
+          <%= form.select :compensation_range, options_for_select(Job::COMPENSATION_RANGE), { :include_blank=>false }, { :class => 'form-control' } %>
+        </div>
+        <div class="col-sm-4">
+          <%= form.label :estimated_hours%>
+          <%= form.select :estimated_hours, options_for_select(Job::HOURLY_RANGE),  { :include_blank=>false },{:class => 'form-control' } %>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-sm-6">
+          <%= form.label :years_of_experience %>
+          <%= form.select :years_of_experience, options_for_select(Job::YEARS_OF_EXPERIENCE_RANGE), { :include_blank=>false }, class: "form-control"%>
+        </div>
+        <div class="col-sm-6">
+          <div class="custom-control custom-checkbox">
+            <%= form.check_box :remote, class:"custom-control-input",id:"materialChecked" %>
+            <%= form.label :remote ,class:"custom-control-label", for:"materialChecked"%>
+          </div>
+        </div>
+      </div>
+      <div class="actions">
+        <%= form.submit "Save", class: "btn btn-success btn-lg mt-4"%>
+      </div>
+    </div>
   </div>
 <% end %>

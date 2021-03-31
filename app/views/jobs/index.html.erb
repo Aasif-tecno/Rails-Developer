@@ -1,3 +1,26 @@
+<div class="header">
+        <div class="title">Your Job listing</div>
+        <p><small class="text-muted">We are a homegrown, globally connected, <br /><u>Experimental</u> HUB that prides itself on its <u>Creativity</u><br /> and <u>Innovation.</u> </small></p>
+    </div>
+    <div class="row" style="justify-content: center">
+      <% @jobs.each do |job| %>
+        <div class="card job-index col-md-3 mt-5">
+            <div class="card-content">
+                <div class="card-body p-0">
+                    <div class="profile"> <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1574583246/AAA/2.jpg"> </div>
+                    <div class="card-title"><%= job.title %><br /> <small><%= job.company_name %></small> </div>
+                    <div class="card-subtitle">
+                        <p> <small class="text-muted"> <%= job.description %> </small> </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% end %>
+
+    </div>
+    <div class="ft">
+        <div class="btn btn-outline">Tell a nice word</div>
+    </div>
 <p id="notice"><%= notice %></p>
 
 <h1>Jobs</h1>
@@ -30,7 +53,7 @@
         <td><%= job.company_website %></td>
         <td><%= job.company_description %></td>
         <td><%= job.role_type %></td>
-        <td><%= job.compersatino_range %></td>
+        <td><%= job.compensation_range %></td>
         <td><%= job.remote %></td>
         <td><%= job.years_of_experience %></td>
         <td><%= job.user_id %></td>

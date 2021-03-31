@@ -17,6 +17,7 @@
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
 #  reset_password_token   :string
+#  slug                   :string
 #  unconfirmed_email      :string
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
@@ -26,9 +27,13 @@
 #  index_users_on_confirmation_token    (confirmation_token) UNIQUE
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#  index_users_on_slug                  (slug) UNIQUE
 #
 class User < ApplicationRecord
+  
+
   include SimpleDiscussion::ForumUser
+
   has_person_name
   has_many :jobs, dependent: :destroy
 
@@ -40,5 +45,8 @@ class User < ApplicationRecord
   def name
     "#{first_name} #{last_name}"
   end
+
+
+
   
 end

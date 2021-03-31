@@ -289,6 +289,9 @@ GEM
       gravatar_image_tag
       rails (>= 4.2)
       will_paginate (>= 3.1.0)
+    simple_form (5.1.0)
+      actionpack (>= 5.2)
+      activemodel (>= 5.2)
     sitemap_generator (6.1.2)
       builder (~> 3.0)
     spring (2.1.1)
@@ -377,6 +380,7 @@ DEPENDENCIES
   selenium-webdriver
   sidekiq (~> 6.1)
   simple_discussion (~> 1.0)
+  simple_form
   sitemap_generator (~> 6.1, >= 6.1.2)
   spring
   stripe (~> 5.30)

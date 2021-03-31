@@ -59,3 +59,4 @@ gem "pay", "~> 2.6"
 gem "pagy", "~> 3.12"
 gem "inline_svg", "~> 1.7"
 gem "simple_discussion", "~> 1.0"
+gem 'simple_form'

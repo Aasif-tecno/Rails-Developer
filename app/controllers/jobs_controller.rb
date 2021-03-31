@@ -4,7 +4,7 @@ class JobsController < ApplicationController
 
   # GET /jobs or /jobs.json
   def index
-    @jobs = Job.all
+    @jobs = Job.desc
   end
 
   # GET /jobs/1 or /jobs/1.json
@@ -13,7 +13,7 @@ class JobsController < ApplicationController
 
   # GET /jobs/new
   def new
-    @job = Job.new
+    @job = current_user.jobs.new
   end
 
   # GET /jobs/1/edit
@@ -22,7 +22,7 @@ class JobsController < ApplicationController
 
   # POST /jobs or /jobs.json
   def create
-    @job = Job.new(job_params)
+    @job = current_user.jobs.new(job_params)
 
     respond_to do |format|
       if @job.save
@@ -60,11 +60,15 @@ class JobsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_job
-      @job = Job.find(params[:id])
+      @job = Job.friendly.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def job_params
-      params.require(:job).permit(:title, :link_to_apply, :description, :company_name, :company_website, :company_description, :role_type, :compersatino_range, :remote, :years_of_experience, :user_id)
+      params.require(:job).permit(:company_name, :company_website, :description, :company_description, :compensation_range, :compensation_type, 
+        :estimated_hours, :headquarters, :link_to_apply, :price, :remote, 
+        :title, :upsell_type, :years_of_experience,)
+
+
     end
 end
