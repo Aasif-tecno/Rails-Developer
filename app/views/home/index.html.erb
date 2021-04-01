@@ -1,3 +1,35 @@
-<% @jobs.each do |job| %>
-  <%= job.title %>
+<div class="header">
+  <div class="title">Find Ruby On Rails Developer</div>
+  <p><small class="text-muted">We are a homegrown, globally connected, <br /><u>Experimental</u> HUB that prides itself on its <u>Creativity</u><br /> and <u>Innovation.</u> </small></p>
+  <%= link_to "Find a developer", developers_path, class: "btn btn-success btn-lg"%>
+  <%= link_to "Find a job", root_path(anchor: "card-index"), class: "btn btn-outline-success  btn-lg" %>
+</div>
+  <div class="row home-card">
+    <% @jobs.each do |job| %>
+    <div class="col-md-6 column">
+      <div class="card-index gr-2">
+        <div class="txt">
+          <div class="d-flex justify-content-between">
+            <%= job.company_name %>
+            <div><%if job.featured? %>
+              <span class="badge badge-primary">Featured</span>
+            <% end %></div>
+          </div>
+          <h1> <%= link_to job_path(job), class: "text-decoration-none text-dark" do %><%= job.title %> <% end %></h1>
+          <p><%= job.description %></p>
+          <p>
+          <%= job.compensation_type %>  &bull;   <%= number_to_currency(job.compensation_range) %>  &bull;   <%= job.years_of_experience %> years of experience<br>
+          <% if job.remote? %>
+            Remote job
+          <% end %><br>
+          <%= job.headquarters%> &bull; <%= job.company_website %></p>
+        </div>
+        <div class="ico-card">
+          <i class="fa-camera"></i>        
+      </div>
+      </div>
+    </div>
+
 <% end %>
+    
+    </div>

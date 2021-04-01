@@ -1,27 +1,42 @@
 <div class="header">
-        <div class="title">Your Job listing</div>
-        <p><small class="text-muted">We are a homegrown, globally connected, <br /><u>Experimental</u> HUB that prides itself on its <u>Creativity</u><br /> and <u>Innovation.</u> </small></p>
-    </div>
-    <div class="row" style="justify-content: center">
-      <% @jobs.each do |job| %>
-        <div class="card job-index col-md-3 mt-5">
-            <div class="card-content">
-                <div class="card-body p-0">
-                    <div class="profile"> <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1574583246/AAA/2.jpg"> </div>
-                    <div class="card-title"><%= job.title %><br /> <small><%= job.company_name %></small> </div>
-                    <div class="card-subtitle">
-                        <p> <small class="text-muted"> <%= job.description %> </small> </p>
-                    </div>
-                </div>
+    <div class="title">Your Job listing</div>
+    <p><small class="text-muted">We are a homegrown, globally connected, <br /><u>Experimental</u> HUB that prides itself on its <u>Creativity</u><br /> and <u>Innovation.</u> </small></p>
+</div>
+<div class="row" , style="justify-content: center">
+  <% @jobs.each do |job| %>
+    <div class="card job-index col-md-3 mt-5">
+      <%= link_to job , class: "text-decoration-none" do %>
+        <div class="card-content">
+          <div class="card-body p-0">
+            <div class="profile">
+              <% if job.company_logo.attached?%>
+                <%= image_tag job.company_logo %>
+              <% else %>
+                <%= image_tag "company-img" %>
+              <% end %>
             </div>
-        </div>
-    <% end %>
+            <div class="card-title"><%= job.title %><br /> <small><%= job.company_name %></small> </div>
+              <div class="card-subtitle">
+                <p> <small class="text-muted">
+                  <%= job.description %><br>
+                  <%= job.compensation_type %> <br>
+                  <%= job.compensation_range %><br>
+                  <%= job.years_of_experience %> years of experience<br>
+                  <%= link_to 'Edit', edit_job_path(job) , class: "btn btn-info btn-sm"%>
+                 <%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm" %>
+                 </small> 
+                </p>
+              </div>
+            </div>
+          </div>
+      <% end %>
+    </div>
+  <% end %>
+    </div>
 
-    </div>
     <div class="ft">
-        <div class="btn btn-outline">Tell a nice word</div>
+     <%= link_to 'New Job', new_job_path, class: "btn btn-outline" %>
     </div>
-<p id="notice"><%= notice %></p>
 
 <h1>Jobs</h1>
 
@@ -58,7 +73,8 @@
         <td><%= job.years_of_experience %></td>
         <td><%= job.user_id %></td>
         <td><%= link_to 'Show', job %></td>
-        <td><%= link_to 'Edit', edit_job_path(job) %></td>
+        <td>
+        </td>
         <td><%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -67,4 +83,3 @@
 
 <br>
 
-<%= link_to 'New Job', new_job_path %>

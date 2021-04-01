@@ -1,0 +1,34 @@
+<div class="header">
+  <div class="title">Find Ruby On Rails Developer</div>
+  <p><small class="text-muted">We are a homegrown, globally connected, <br /><u>Experimental</u> HUB that prides itself on its <u>Creativity</u><br /> and <u>Innovation.</u> </small></p>
+</div>
+
+	<div class="row">
+    <% @developer.each do |dev|%>
+      <div class="col-md-4">
+      <div class="developer-card">
+        <img src="http://envato.jayasankarkr.in/code/profile/assets/img/profile-6.jpg" class="img img-responsive">
+        <div class="profile-name"><%= dev.name%></div>
+          <div class="profile-position">Lorem Ipsum Donor</div>
+            <div class="profile-overview">
+              <div class="profile-overview">
+                <div class="d-flex justify-content-around">
+                  <div class="col-xs-4">
+                    <h3>1</h3>
+                    <p>Rank</p>
+                  </div>
+                <div class="col-xs-4">
+                  <h3>50</h3>
+                  <p>Matches</p>
+                </div>
+                <div class="col-xs-4">
+                    <h3>35</h3>
+                    <p>Goals</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> 
+      <% end %>
+	</div>

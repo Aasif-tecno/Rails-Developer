@@ -46,6 +46,9 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  def self.developer
+    where(developer: true)
+  end
 
 
   

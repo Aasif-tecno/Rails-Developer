@@ -16,7 +16,24 @@
       <%= form.input :title%>
       <%= form.input :link_to_apply%>
       <%= form.input :description,as: :rich_text_area %>
-      <%= form.input :company_name %>
+      <div class="row">
+        <div class="col-sm-8">
+          <%= form.input :company_name %>
+          <%= form.label :company_logo%>
+          <%= form.file_field :company_logo , class: "form-control-file" %>
+        </div>
+        <div class="col-sm-4">
+          <div class="row">
+            <div class="col-6">
+            </div>
+            <div class="col-6">
+              <% if form.object.company_logo.attached?%>
+              <%= image_tag form.object.company_logo.variant(resize_to_fit: [200, 200]), class: "img-fluid rounded img-thumbnail" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="row">
         <div class="col-sm-6">
           <%= form.input :headquarters %>
