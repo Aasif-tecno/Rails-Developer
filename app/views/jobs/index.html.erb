@@ -15,10 +15,10 @@
                 <%= image_tag "company-img" %>
               <% end %>
             </div>
-            <div class="card-title"><%= job.title %><br /> <small><%= job.company_name %></small> </div>
+            <div class="card-title mt-3"><%= job.title %><br /> <small><%= job.company_name %></small> </div>
               <div class="card-subtitle">
                 <p> <small class="text-muted">
-                  <%= job.description %><br>
+                  <%= truncate(strip_tags(job.description.to_s), length: 100)%><br>
                   <%= job.compensation_type %> <br>
                   <%= job.compensation_range %><br>
                   <%= job.years_of_experience %> years of experience<br>

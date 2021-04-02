@@ -18,9 +18,7 @@
     position: relative;
     bottom: 11px
 }
-body{
-    // background-color: #B4EC51;
-}
+
 
 .job-index {
     border-radius: 15px;
@@ -33,6 +31,9 @@ body{
         height: 68px;
         border-radius: 50%
     }    
+    .card-title{
+      font-size: 1.4rem;
+    }
     .card-body {
         position: relative;
         bottom: 35px
