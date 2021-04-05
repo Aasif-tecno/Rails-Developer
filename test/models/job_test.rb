@@ -7,6 +7,7 @@
 #  company_website     :string
 #  compensation_range  :string
 #  compensation_type   :string
+#  deleted_at          :datetime
 #  estimated_hours     :string
 #  featured            :boolean          default(FALSE)
 #  featured_until      :datetime
@@ -27,8 +28,9 @@
 #
 # Indexes
 #
-#  index_jobs_on_slug     (slug) UNIQUE
-#  index_jobs_on_user_id  (user_id)
+#  index_jobs_on_deleted_at  (deleted_at)
+#  index_jobs_on_slug        (slug) UNIQUE
+#  index_jobs_on_user_id     (user_id)
 #
 # Foreign Keys
 #

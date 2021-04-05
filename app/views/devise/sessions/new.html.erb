@@ -1,26 +1,61 @@
-<h2>Log in</h2>
+<div class="d-flex justify-content-center">
+  <div class="card col-md-6">
+    <div class="card-body">
+    <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
+        <li class="nav-item" role="presentation">
+        <%= link_to "LOGIN", new_user_session_path, class: "nav-link active"%>          
+        </li>
+        <li class="nav-item" role="presentation">
+          <%= link_to "SIGNUP", new_user_registration_path, class: "nav-link" %>
+        </li>
+      </ul>
+      <%# <div class="text-center mb-3">
+        <p>Sign up with:</p>
+        <button type="button" class="btn btn-primary btn-floating mx-1">
+          <i class="fab fa-facebook-f"></i>
+        </button>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="form-group">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
-  </div>
+        <button type="button" class="btn btn-primary btn-floating mx-1">
+          <i class="fab fa-google"></i>
+        </button>
 
-  <div class="form-group">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
-  </div>
+        <button type="button" class="btn btn-primary btn-floating mx-1">
+          <i class="fab fa-twitter"></i>
+        </button>
 
-  <% if devise_mapping.rememberable? %>
-    <div class="form-group">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+        <button type="button" class="btn btn-primary btn-floating mx-1">
+          <i class="fab fa-github"></i>
+        </button>
+      </div> %>
+
+      <p class="text-center">or:</p>
+
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+        <div class="form-outline mb-4">
+          <%= f.label :email %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+        </div>
+
+        <div class="form-outline mb-4">
+          <%= f.label :password %><br />
+          <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
+        </div>
+
+        <% if devise_mapping.rememberable? %>
+          <div class="form-check d-flex justify-content-center mb-4">
+            <span><%= f.check_box :remember_me, class: "form-check-input" %></span>
+            <label class="form-check-label">
+              Remenber me
+            </label>
+          </div>
+        <% end %>
+
+        <div class="actions">
+          <%= f.submit "Log in" , class:"btn btn-primary btn-block mb-3" %>
+        </div>
+      <% end %>
+      <%= render "devise/shared/links" %>
+
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit "Log in" %>
   </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>

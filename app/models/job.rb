@@ -7,6 +7,7 @@
 #  company_website     :string
 #  compensation_range  :string
 #  compensation_type   :string
+#  deleted_at          :datetime
 #  estimated_hours     :string
 #  featured            :boolean          default(FALSE)
 #  featured_until      :datetime
@@ -27,14 +28,16 @@
 #
 # Indexes
 #
-#  index_jobs_on_slug     (slug) UNIQUE
-#  index_jobs_on_user_id  (user_id)
+#  index_jobs_on_deleted_at  (deleted_at)
+#  index_jobs_on_slug        (slug) UNIQUE
+#  index_jobs_on_user_id     (user_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (user_id => users.id)
 #
 class Job < ApplicationRecord
+  acts_as_paranoid
   extend FriendlyId
   friendly_id :title, use: :slugged
 
@@ -43,6 +46,8 @@ class Job < ApplicationRecord
   has_rich_text :description
   has_rich_text :company_description
   has_one_attached :company_logo
+  validates :title,:company_name,:company_description,:link_to_apply, presence: true
+  validates :description, presence: true, length: { minimum: 30, maximum: 100}
    
   
   #scopes
@@ -58,7 +63,7 @@ class Job < ApplicationRecord
     "Contract",
     "Full-time"
   ]
-
+  
   COMPENSATION_RANGE = [
     "30,000 - 35,000",
     "35,000 - 40,000",
@@ -109,7 +114,17 @@ class Job < ApplicationRecord
   def archived?
     self.status == Job::JOB_STATUSES[:archived]
   end
-
+  
+  def badge_color
+    case status
+    when 'pending'
+      'secondary'
+    when 'archive'
+      'info'
+    when 'published'
+      'success'
+    end
+  end
   def should_generate_new_friendly_id?
     if !slug?
       title_changed?

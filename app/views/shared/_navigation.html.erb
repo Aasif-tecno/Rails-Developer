@@ -1,4 +1,4 @@
-<nav class="navbar navbar-custom navbar-expand-lg navbar-light <%= cycle("gr-1", "gr-2", "gr-3")%>">
+<nav class="navbar navbar-custom navbar-expand-lg navbar-light ">
   <div class="container">
   <%= link_to "RailsDeveloper", root_path, class: "navbar-brand" %>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -10,9 +10,6 @@
       <li class="nav-item <%= current_page?(root_path) ? "active" : ""  %>">
         <%= link_to "Home", root_path, class: "nav-link" %>
       </li>
-      <li class="nav-item <%= current_page?(jobs_path) ? "active" : ""  %>">
-        <%= link_to "Jobs", jobs_path, class: "nav-link" %>
-      </li>
       <% if !user_signed_in? %>
         <li class="nav-item">
           <%= link_to "Sign Up", new_user_registration_path, class: "nav-link" %>
@@ -20,19 +17,23 @@
         <li class="nav-item">
           <%= link_to "Log in", new_user_session_path, class: "nav-link" %>
         </li>
+      <% else%>
+      <li class="nav-item <%= current_page?(jobs_path) ? "active" : ""  %>">
+        <%= link_to "Jobs", jobs_path, class: "nav-link" %>
+      </li>
       <% end %>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <% if user_signed_in? %>
-            <%= link_to "Edit Profile", edit_user_registration_path, class: "dropdown-item" %>
-            <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
-          <% end %>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
-        </div>
+      <% if user_signed_in? %>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Dropdown
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to "Edit Profile", edit_user_registration_path, class: "dropdown-item" %>
+              <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Something else here</a>
+          </div>
+      <% end %>
       </li>
      
     </ul>

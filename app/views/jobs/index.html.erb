@@ -1,85 +1,46 @@
-<div class="header">
-    <div class="title">Your Job listing</div>
-    <p><small class="text-muted">We are a homegrown, globally connected, <br /><u>Experimental</u> HUB that prides itself on its <u>Creativity</u><br /> and <u>Innovation.</u> </small></p>
+<div class="d-flex justify-content-between">
+    <h3>Your Job listing</h3>
+    <%= link_to 'New Job', new_job_path, class: "btn btn-primary" %>    
 </div>
 <div class="row" , style="justify-content: center">
   <% @jobs.each do |job| %>
-    <div class="card job-index col-md-3 mt-5">
+    <div class="card job-index col-md-3 mt-5 border border-dark">
       <%= link_to job , class: "text-decoration-none" do %>
         <div class="card-content">
           <div class="card-body p-0">
-            <div class="profile">
-              <% if job.company_logo.attached?%>
-                <%= image_tag job.company_logo %>
-              <% else %>
-                <%= image_tag "company-img" %>
-              <% end %>
+            <div class="profile d-flex justify-content-between">
+              <div>
+                <% if job.company_logo.attached?%>
+                  <%= image_tag job.company_logo %>
+                <% else %>
+                  <%= image_tag "company-img" %>
+                <% end %>
+              </div>
+              <div>
+                  <span class="badge badge-<%= job.badge_color%>"><%= job.status%></span>
+              </div>
             </div>
+            
             <div class="card-title mt-3"><%= job.title %><br /> <small><%= job.company_name %></small> </div>
               <div class="card-subtitle">
                 <p> <small class="text-muted">
-                  <%= truncate(strip_tags(job.description.to_s), length: 100)%><br>
+                  <%= truncate(strip_tags(job.description.to_s), length: 50)%><br>
                   <%= job.compensation_type %> <br>
                   <%= job.compensation_range %><br>
                   <%= job.years_of_experience %> years of experience<br>
-                  <%= link_to 'Edit', edit_job_path(job) , class: "btn btn-info btn-sm"%>
-                 <%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm" %>
-                 </small> 
+                  </small> 
                 </p>
               </div>
+                <%= link_to 'Edit', edit_job_path(job) , class: "btn btn-info btn-sm"%>        
+                <% if job.published? %>
+                  <%= link_to 'Unpublish', unpublish_path(job), method: :put , class: "btn btn-warning btn-sm"%>        
+                <% else %>
+                  <%= link_to 'publish', publish_path(job), method: :put , class: "btn btn-success btn-sm"%>        
+                <% end %>
+                <%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm" %>
             </div>
           </div>
       <% end %>
     </div>
   <% end %>
-    </div>
-
-    <div class="ft">
-     <%= link_to 'New Job', new_job_path, class: "btn btn-outline" %>
-    </div>
-
-<h1>Jobs</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Link to apply</th>
-      <th>Description</th>
-      <th>Company name</th>
-      <th>Company website</th>
-      <th>Company description</th>
-      <th>Role type</th>
-      <th>Compersatino range</th>
-      <th>Remote</th>
-      <th>Years of experience</th>
-      <th>User</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @jobs.each do |job| %>
-      <tr>
-        <td><%= job.title %></td>
-        <td><%= job.link_to_apply %></td>
-        <td><%= job.description %></td>
-        <td><%= job.company_name %></td>
-        <td><%= job.company_website %></td>
-        <td><%= job.company_description %></td>
-        <td><%= job.role_type %></td>
-        <td><%= job.compensation_range %></td>
-        <td><%= job.remote %></td>
-        <td><%= job.years_of_experience %></td>
-        <td><%= job.user_id %></td>
-        <td><%= link_to 'Show', job %></td>
-        <td>
-        </td>
-        <td><%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
+</div>

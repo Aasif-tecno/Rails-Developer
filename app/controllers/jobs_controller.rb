@@ -4,7 +4,8 @@ class JobsController < ApplicationController
 
   # GET /jobs or /jobs.json
   def index
-    @jobs = Job.desc
+    @jobs = current_user.jobs.desc
+    @job= current_user.jobs.build
   end
 
   # GET /jobs/1 or /jobs/1.json
@@ -50,12 +51,28 @@ class JobsController < ApplicationController
 
   # DELETE /jobs/1 or /jobs/1.json
   def destroy
+    @job.update status: "archived"
     @job.destroy
     respond_to do |format|
       format.html { redirect_to jobs_url, notice: "Job was successfully destroyed." }
       format.json { head :no_content }
     end
   end
+
+  def publish
+    job = current_user.jobs.friendly.find(params[:id])
+    job.update(status: "published")
+    flash[:notice] = "published Succesfully"
+    redirect_to job
+  end
+
+  def unpublish
+    job = current_user.jobs.friendly.find(params[:id])
+    job.update(status: "pending")
+    flash[:notice] = "Status changed form published to pending"
+    redirect_to request.referrer  
+  end
+ 
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -68,7 +85,7 @@ class JobsController < ApplicationController
       params.require(:job).permit(:company_name, :company_website, :company_logo, :description, :company_description, :compensation_range, :compensation_type, 
         :estimated_hours, :headquarters, :link_to_apply, :price, :remote, 
         :title, :upsell_type, :years_of_experience,)
-
-
     end
+
+    
 end
