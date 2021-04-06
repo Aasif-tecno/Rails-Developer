@@ -4,7 +4,7 @@ class JobsController < ApplicationController
 
   # GET /jobs or /jobs.json
   def index
-    @jobs = current_user.jobs.desc
+    @jobs = current_user.jobs.with_deleted.desc
     @job= current_user.jobs.build
   end
 
@@ -61,9 +61,10 @@ class JobsController < ApplicationController
 
   def publish
     job = current_user.jobs.friendly.find(params[:id])
-    job.update(status: "published")
+    job.update(status: "published",published_at: Time.now)
     flash[:notice] = "published Succesfully"
-    redirect_to job
+    redirect_to request.referrer  
+    # redirect_to job
   end
 
   def unpublish

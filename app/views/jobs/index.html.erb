@@ -1,10 +1,10 @@
-<div class="d-flex justify-content-between">
+<div class="d-flex justify-content-between m-4">
     <h3>Your Job listing</h3>
     <%= link_to 'New Job', new_job_path, class: "btn btn-primary" %>    
 </div>
 <div class="row" , style="justify-content: center">
   <% @jobs.each do |job| %>
-    <div class="card job-index col-md-3 mt-5 border border-dark">
+    <div class="card job-index col-md-3 mt-5 ">
       <%= link_to job , class: "text-decoration-none" do %>
         <div class="card-content">
           <div class="card-body p-0">
@@ -17,7 +17,7 @@
                 <% end %>
               </div>
               <div>
-                  <span class="badge badge-<%= job.badge_color%>"><%= job.status%></span>
+                <span class="badge badge-<%= job.badge_color%>"><%= job.status%></span>
               </div>
             </div>
             
@@ -38,6 +38,7 @@
                   <%= link_to 'publish', publish_path(job), method: :put , class: "btn btn-success btn-sm"%>        
                 <% end %>
                 <%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm" %>
+                <small class="text-muted">Published at: <%= time_ago_in_words(job.published_at) if job.published? %> ago</small>
             </div>
           </div>
       <% end %>

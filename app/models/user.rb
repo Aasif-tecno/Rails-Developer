@@ -36,7 +36,8 @@ class User < ApplicationRecord
 
   has_person_name
   has_many :jobs, dependent: :destroy
-
+  has_one :profile
+ 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -46,8 +47,12 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
+  
   def self.developer
     where(developer: true)
+  end
+  def self.employer
+    where(employer: true)
   end
 
 

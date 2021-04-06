@@ -1,0 +1,56 @@
+# == Schema Information
+#
+# Table name: profiles
+#
+#  id                 :bigint           not null, primary key
+#  desired_employment :string
+#  desired_location   :string
+#  desired_salary     :string
+#  dob                :date
+#  experience         :string
+#  gender             :string
+#  hometown           :string
+#  key_skills         :string
+#  language_known     :string
+#  marital_status     :string
+#  permanent_address  :string
+#  pincode            :string
+#  summary            :string
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  user_id            :bigint
+#
+# Indexes
+#
+#  index_profiles_on_user_id  (user_id)
+#
+
+one:
+  summary: MyString
+  key_skills: MyString
+  experience: MyString
+  desired_location: MyString
+  desired_employment: MyString
+  desired_salary: MyString
+  language_known: MyString
+  gender: MyString
+  marital_status: MyString
+  dob: 2021-04-06
+  hometown: MyString
+  pincode: MyString
+  permanent_address: MyString
+
+two:
+  summary: MyString
+  key_skills: MyString
+  experience: MyString
+  desired_location: MyString
+  desired_employment: MyString
+  desired_salary: MyString
+  language_known: MyString
+  gender: MyString
+  marital_status: MyString
+  dob: 2021-04-06
+  hometown: MyString
+  pincode: MyString
+  permanent_address: MyString

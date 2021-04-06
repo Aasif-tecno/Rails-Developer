@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_05_115202) do
+ActiveRecord::Schema.define(version: 2021_04_06_064051) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -127,6 +127,26 @@ ActiveRecord::Schema.define(version: 2021_04_05_115202) do
     t.index ["deleted_at"], name: "index_jobs_on_deleted_at"
     t.index ["slug"], name: "index_jobs_on_slug", unique: true
     t.index ["user_id"], name: "index_jobs_on_user_id"
+  end
+
+  create_table "profiles", force: :cascade do |t|
+    t.string "summary"
+    t.string "key_skills"
+    t.string "experience"
+    t.string "desired_location"
+    t.string "desired_employment"
+    t.string "desired_salary"
+    t.string "language_known"
+    t.string "gender"
+    t.string "marital_status"
+    t.date "dob"
+    t.string "hometown"
+    t.string "pincode"
+    t.string "permanent_address"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

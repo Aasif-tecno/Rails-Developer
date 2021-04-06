@@ -6,85 +6,87 @@
     <%= link_to 'Edit', edit_job_path(@job), class: "btn btn-warning" %>
     <% end %>
   </div>
-
-  <div class="row">
-    <div class="col-md-8">
-      <h2 class="text-center"> <%= @job.title %></h2><hr>
-      <div class="row">
-        <div class="col-4">
-          <h5>ABOUT THE ROLE</h5>
-        </div>
-        <div class="col-8">
-          <%= @job.description %>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-4">
-          <h5>COMPENSATION TYPE</h5>
-        </div>
-        <div class="col-8">
-          <p><%= @job.compensation_type %> 
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-4">
-          <h5>COMPENSATION RANGE</h5>
-        </div>
-        <div class="col-8">
-          <%= number_to_currency(@job.compensation_range) %>
-        </div>
-      </div>
-     
-      <div class="row">
-        <div class="col-4">
-          <h5>EXPERIENCE</h5>
-        </div>
-        <div class="col-8">
-          <%= pluralize(@job.years_of_experience, "year") %> of experience
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-4">
-          <h5>HOURLY RANGE</h5>
-        </div>
-        <div class="col-8">
-          <%= @job.estimated_hours %>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-4">
-          <h5>REMOTE</h5>
-        </div>
-        <div class="col-8">
-          <%= @job.remote %>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="card job-index mt-5 border border-dark">
-        <div class="card-content">
-          <div class="card-body p-0">
-            <div class="profile">
-              <% if @job.company_logo.attached?%>
-                <%= image_tag @job.company_logo %>
-              <% else %>
-                <%= image_tag "company-img" %>
-              <% end %>
-            </div>
-            <div class="card-title mt-4"><%= link_to  @job.company_name, @job.company_website %></div>
-              <div class="card-subtitle p-3">
-                <p> <small class="text-muted">
-                  <%= @job.headquarters %><br>
-                  <%= @job.company_description %><br>
-                   <%= link_to "Apply for this role", @job.link_to_apply, class: "btn btn-primary"%>
-                  </small> 
-                </p>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+        <div class="card card-profile shadow">
+          <div class="row justify-content-center">
+            <div class="col-lg-3 order-lg-2">
+              <div class="card-profile-image mt-5">
+                <% if @job.company_logo.attached?%>
+                  <%= image_tag @job.company_logo, class: "rounded-circle" %>
+                <% else %>
+                  <%= image_tag "company-img", class: "rounded-circle" %>
+                <% end %>
               </div>
             </div>
+          </div>
+          <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+            <div class="d-flex justify-content-between">
+              <a href="#" class="btn btn-sm btn-info mr-4">Connect</a>
+              <a href="#" class="btn btn-sm btn-default float-right">Message</a>
+            </div>
+          </div>
+          <div class="card-body pt-0 pt-md-4">
+            <div class="text-center">
+              <h3>
+                <%= @job.company_name %><span class="font-weight-light"></span>
+              </h3>
+              <div class="h5 font-weight-300">
+                <i class="ni location_pin mr-2"></i><%= @job.headquarters %>
+              </div>
+              <div class="h5">
+                <i class="ni business_briefcase-24 mr-2"></i><%= @job.company_description %>
+              </div>
+              <div>
+                <i class="ni education_hat mr-2"></i><%= @job.company_website %>
+              </div>
+                <%= link_to "Apply for this role", @job.link_to_apply, class: "btn btn-primary"%>
+              <%# <hr class="my-4">
+              <p>Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music.</p>
+              <a href="#">Show more</a> %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-8 order-xl-1">
+        <div class="card bg-secondary shadow">
+          <div class="card-header bg-white border-0">
+            <div class="row align-items-center">
+              <div class="col-8">
+                <h3 class="mb-0"><%= @job.title %></h3>
+              </div>
+              <div class="col-4 text-right">
+                <a href="#!" class="btn btn-sm btn-primary">Settings</a>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <h6 class="heading-small text-muted mb-3">ABOUT THE ROLE</h6>
+            <div class="pl-lg-4">
+              <%= @job.description %>              
+            </div>
+            <h6 class="heading-small text-muted mb-3 mt-3">COMPENSATION TYPE</h6>
+             <div class="pl-lg-4">
+              <%= @job.compensation_type %>             
+            </div>
+            <h6 class="heading-small text-muted mb-3 mt-3">COMPENSATION RANGE</h6>
+             <div class="pl-lg-4">
+              <%= number_to_currency(@job.compensation_range) %>
+            </div>
+            <h6 class="heading-small text-muted mb-3 mt-3">EXPERIENCE</h6>
+             <div class="pl-lg-4">
+              <%= pluralize(@job.years_of_experience, "year") %> of experience             
+            </div>
+            <h6 class="heading-small text-muted mb-3 mt-3">HOURLY RANGE</h6>
+             <div class="pl-lg-4">
+              <%= @job.estimated_hours %>              
+            </div>
+            <h6 class="heading-small text-muted mb-3 mt-3">REMOTE</h6>    
+             <div class="pl-lg-4">
+              <%= @job.remote %>              
+            </div>
+            
           </div>
         </div>
       </div>

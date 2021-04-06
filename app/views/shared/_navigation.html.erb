@@ -1,4 +1,4 @@
-<nav class="navbar navbar-custom navbar-expand-lg navbar-light ">
+<nav class="navbar navbar-custom navbar-expand-lg navbar-dark">
   <div class="container">
   <%= link_to "RailsDeveloper", root_path, class: "navbar-brand" %>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -11,32 +11,52 @@
         <%= link_to "Home", root_path, class: "nav-link" %>
       </li>
       <% if !user_signed_in? %>
-        <li class="nav-item">
-          <%= link_to "Sign Up", new_user_registration_path, class: "nav-link" %>
-        </li>  
+        
         <li class="nav-item">
           <%= link_to "Log in", new_user_session_path, class: "nav-link" %>
         </li>
       <% else%>
-      <li class="nav-item <%= current_page?(jobs_path) ? "active" : ""  %>">
-        <%= link_to "Jobs", jobs_path, class: "nav-link" %>
-      </li>
+        <% if current_user.developer %>
+          <li class="nav-item <%= current_page?(jobs_path) ? "active" : ""  %>">
+            <%= link_to "Jobs", jobs_path, class: "nav-link" %>
+          </li>
+        <% end %>
       <% end %>
       <% if user_signed_in? %>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Dropdown
+            <%= current_user.name%>
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <% if current_user.developer %>
+                <%= link_to "Profile", profiles_path, class: "dropdown-item" %>
+              <% end %>
               <%= link_to "Edit Profile", edit_user_registration_path, class: "dropdown-item" %>
-              <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
+            <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
           </div>
+        </li> 
       <% end %>
-      </li>
-     
     </ul>
   </div>
   </div>
-</nav>
+
+</nav> 
+    <%  if current_page?(root_path) %>
+    <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 400px; ">
+      <!-- Mask -->
+      <span class="mask bg-gradient-default opacity-10"></span>
+      <!-- Header container-->
+      <div class="container-fluid align-items-center">
+        <div class="row">
+          <div class="col">
+            <h1 class="display-2 text-white">Find Ruby On Rails Developer</h1>
+            <p class="text-white mt-0">The internet's number one source for Ruby On Rails Developer </p>
+              <%= link_to "Find a developer", developers_path, class: "btn btn-primary"%>
+              <%= link_to "Find a job", root_path(anchor: "card-index"), class: "btn btn-outline-primary" %>
+            <p class="text-white mt-0"> or Find a Job of your wish</p>
+          </div>
+        </div>
+      </div> 
+    </div> 
+    <% end %>

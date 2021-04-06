@@ -1,0 +1,69 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Summary:</strong>
+  <%= @profile.summary %>
+</p>
+
+<p>
+  <strong>Key skills:</strong>
+  <%= @profile.key_skills %>
+</p>
+
+<p>
+  <strong>Experience:</strong>
+  <%= @profile.experience %>
+</p>
+
+<p>
+  <strong>Desired location:</strong>
+  <%= @profile.desired_location %>
+</p>
+
+<p>
+  <strong>Desired employment:</strong>
+  <%= @profile.desired_employment %>
+</p>
+
+<p>
+  <strong>Desired salary:</strong>
+  <%= @profile.desired_salary %>
+</p>
+
+<p>
+  <strong>Language known:</strong>
+  <%= @profile.language_known %>
+</p>
+
+<p>
+  <strong>Gender:</strong>
+  <%= @profile.gender %>
+</p>
+
+<p>
+  <strong>Marital status:</strong>
+  <%= @profile.marital_status %>
+</p>
+
+<p>
+  <strong>Dob:</strong>
+  <%= @profile.dob %>
+</p>
+
+<p>
+  <strong>Hometown:</strong>
+  <%= @profile.hometown %>
+</p>
+
+<p>
+  <strong>Pincode:</strong>
+  <%= @profile.pincode %>
+</p>
+
+<p>
+  <strong>Permanent address:</strong>
+  <%= @profile.permanent_address %>
+</p>
+
+<%= link_to 'Edit', edit_profile_path(@profile) %> |
+<%= link_to 'Back', profiles_path %>

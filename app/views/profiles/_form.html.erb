@@ -1,0 +1,130 @@
+
+<%= simple_form_for(@profile) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+  <div class="card bg-secondary shadow mt-5">
+    <div class="card-header bg-white border-0">
+      <div class="row align-items-center">
+        <div class="col-8">
+          <h3 class="mb-0">My Profile</h3>
+        </div>
+        <div class="col-4 text-right">
+          <%= link_to 'Back', profiles_path, class:"btn btn-primary" %>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <form>
+      <h6 class="heading-small text-muted mb-4">About me</h6>
+        <div class="pl-lg-4">
+          <div class="form-group focused">
+            <%= f.input :summary, as: :rich_text_area  %>
+          </div>
+          <div class="form-group focused">
+            <%= f.input :key_skills %>
+          </div>
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="form-group focused">
+                <%= f.label :experience  %>
+                <%= f.select :experience, options_for_select(Profile::YEARS_OF_EXPERIENCE_RANGE),  { :include_blank=>false },class: "form-control"  %>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="form-group">
+                <%= f.label :desired_employment  %>
+                <%= f.select :desired_employment, options_for_select(Profile::DESIRED_EMPLOYMENT),  { :include_blank=>false },class: "form-control"   %>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="form-group">
+                <%= f.label :desired_salary  %>
+                <%= f.select :desired_salary, options_for_select(Profile::DESIRED_SALARY) ,  { :include_blank=>false },class: "form-control"  %>          
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="form-group focused">
+                <%= f.input :desired_location %>             
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group focused">
+                <%= f.input :language_known %>              
+              </div>
+            </div>
+          </div>
+        </div>
+        <h6 class="heading-small text-muted mb-4">User information</h6>
+        <div class="pl-lg-4">
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="form-group focused">
+                <%= f.input :avatar %>              
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="form-group">
+                <%= f.input :resume %>             
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="form-group focused">
+                <%= f.label :gender  %>
+                <%= f.select :gender , options_for_select(Profile::GENDER),  { :include_blank=>false },class: "form-control"  %>        
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="form-group focused">
+                <%= f.label :marital_status  %>
+                <%= f.select :marital_status, options_for_select(Profile::MARITAL_STATUS) ,  { :include_blank=>false },class: "form-control"  %>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="form-group">
+                <%= f.input :dob, :start_year=>1980 %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr class="my-4">
+        <!-- Address -->
+        <h6 class="heading-small text-muted mb-4">Contact information</h6>
+        <div class="pl-lg-4">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group focused">
+                <%= f.input :permanent_address %>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-4">
+              <div class="form-group focused">
+                <%= f.input :hometown , placeholder: "city"%>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="form-group focused">
+                <label class="form-control-label" for="input-country">Country</label>
+                <input type="text" id="input-country" class="form-control form-control-alternative" placeholder="Country" >
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="form-group">
+                <%= f.input :pincode, placeholder: "pincode" %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr class="my-4">
+        <%= f.button :submit, class: "btn btn-primary float-right" %>
+        
+      </form>
+    </div>
+  </div>
+<% end %>
+
