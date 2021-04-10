@@ -1,36 +1,30 @@
-<!--<div class="header">
-  <div class="title mb-3">Find Ruby On Rails Developer</div>
-  <p>The internet's number one source for Ruby On Rails Developer </p>
-  <%= link_to "Find a developer", developers_path, class: "btn btn-primary"%>
-  <%= link_to "Find a job", root_path(anchor: "card-index"), class: "btn btn-outline-primary" %>
-  <p> or Find a Job of your wish</p>
-</div> -->
-  <div class="row home-card">
-    <% @jobs.each do |job| %>
-    <div class="col-md-6 column">
-      <div class="card-index <%= cycle("gr-1", "gr-2", "gr-3")%>">
-        <div class="txt">
-          <div class="d-flex justify-content-between">
-            <%= job.company_name %>
-            <div><%if job.featured? %>
-              <span class="badge badge-primary">Featured</span>
-            <% end %></div>
-          </div>
-          <h1> <%= link_to job_path(job), class: "text-decoration-none text-dark" do %><%= job.title %> <% end %></h1>
-          <p><%= truncate(strip_tags(job.description.to_s), length: 100) %></p>
-          <p>
-          <%= job.compensation_type %>  &bull;   <%= number_to_currency(job.compensation_range) %>  &bull;   <%= job.years_of_experience %> years of experience<br>
-          <% if job.remote? %>
-            Remote job
-          <% end %><br>
-          <%= job.headquarters%> &bull; <%= job.company_website %></p>
+<div class="row d-flex justify-content-between">
+  <div>
+    <h3>Recently Published Job</h3> 
+  </div>
+  <% if params[:search].present? %>
+  <div>
+    Showing Result for "<%= params[:search][:search_text]%>"
+  </div>
+  <% end %>
+  <div >
+    <%= simple_form_for(:search, url: root_url,:html => {:method => :get, :class => 'form-inline'}) do |f| %>
+      <div class="input-group float-right">
+       <%= f.text_field :search_text, class: 'form-control',placeholder: "Search Job or Company" %>
+        <div class="input-group-btn">
+          <button class="btn btn-default" type="submit">
+            <i class="fa fa-search"></i>
+          </button>
         </div>
-        <div class="ico-card">
-          <i class="fa-camera"></i>        
-      </div>
-      </div>
+      </div>&nbsp;
+    <% end %>
+  </div>
+</div><hr>
+<% if @jobs.present? %>
+  <div id="results">
+    <div class="row">
+      <%= render partial: 'result' %>
     </div>
-
+  </div>
 <% end %>
-    
-    </div>
+ 

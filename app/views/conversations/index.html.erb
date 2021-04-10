@@ -1,0 +1,78 @@
+
+    <!-- Content wrapper start -->
+<div class="content-wrapper mt-5">
+  <!-- Row start -->
+  <div class="row gutters">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+      <div class="card chat-card m-0">
+      <!-- Row start -->
+        <div class="row no-gutters">
+          <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-3">
+            <div class="users-container">
+              <div class="chat-search-box">
+                <div class="input-group">
+                  <input class="form-control" placeholder="Search">
+                  <div class="input-group-btn">
+                  <button type="button" class="btn btn-info">
+                    <i class="fa fa-search"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <ul class="users">
+              <% @conversations.each do |conversation| %>
+                <% if conversation.sender_id == current_user.id || conversation.recipient_id == current_user.id %>
+                  <% if conversation.sender_id == current_user.id %>
+                    <% recipient = User.find(conversation.recipient_id) %>
+                  <% else %>
+                    <% recipient = User.find(conversation.sender_id) %>
+                  <% end %>
+                  <%= link_to conversation_messages_path(conversation) do %>
+                  <li class="person" data-chat="person1">
+                    <div class="user">
+                      <%  if recipient&.profile&.avatar.present? %>
+                        <%= image_tag recipient.profile.avatar, class: "rounded-circle"%>
+                      <% else %>
+                        <%= image_tag "user-img", class: "rounded-circle"%>
+                      <% end %>
+                      <span class="status busy"></span>
+                    </div>
+                    <p class="name-time">
+                      <%= link_to recipient.name,   conversation_messages_path(conversation), class: "name"%>
+                      <span class="time">15/02/2019</span>
+                    </p>
+                  </li>
+                  <% end %> 
+                <% end %>
+              <% end %>                                                   
+            </ul>
+          </div>
+        </div>
+        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-9 col-9">
+          <div class="selected-user">
+            <span>To: <span class="name"></span></span>
+          </div>
+          <div class="chat-container">
+            <ul class="chat-box chatContainerScroll">
+              <div class="d-flex align-items-center">
+						    <h2> Welcome <%= current_user.name %></h2> 
+                <h3>Click on the user to chat with them</h3>
+              </div>
+						</ul>   
+					</div>
+              <div class="input-group p-3">
+                <input type="text" class="form-control" placeholder="Type your text here">
+                <div class="input-group-btn">
+                  <button class="btn btn-default" type="submit">Reply</button>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+      <!-- Row end -->
+    </div>
+  </div>
+</div>
+<!-- Row end -->
+</div>
+<!-- Content wrapper end -->

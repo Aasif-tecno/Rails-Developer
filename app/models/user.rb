@@ -36,7 +36,7 @@ class User < ApplicationRecord
 
   has_person_name
   has_many :jobs, dependent: :destroy
-  has_one :profile
+  has_one :profile, dependent: :destroy
  
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

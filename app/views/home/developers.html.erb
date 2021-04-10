@@ -1,14 +1,91 @@
-<div class="header">
-  <div class="title">Find Ruby On Rails Developer</div>
-  <p><small class="text-muted">We are a homegrown, globally connected, <br /><u>Experimental</u> HUB that prides itself on its <u>Creativity</u><br /> and <u>Innovation.</u> </small></p>
+<div class="row mt-5">
+  <!-- Single Advisor-->
+  <% @developer.each do |dev|%>
+  <div class="col-12 col-sm-6 col-lg-3">
+    <div class="single_advisor_profile wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+      <!-- Team Thumb-->
+      <div class="advisor_thumb">
+       <%  if dev&.profile&.avatar&.attached? %>
+          <%= image_tag dev.profile.avatar %>
+        <% else %>
+          <%= image_tag "user-img"%>
+        <% end %>
+        <!-- Social Info-->
+        <div class="social-info"><a href="#">
+        <i class="fab fa-facebook"></i><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-linkedin"></i></a></div>
+      </div>
+      <!-- Team Details-->
+      <div class="single_advisor_details_info">
+        <h3><%= dev.name%></h3>
+        <p class="designation"><%= truncate(strip_tags(dev&.profile&.summary.to_s), length: 80)%></p>
+      </div>
+    </div>
+  </div>
+  <% end %>
 </div>
-
-	<div class="row">
+ 
+<div class="row">
     <% @developer.each do |dev|%>
-      <div class="col-md-4">
-      <div class="developer-card">
+      <div class="col-md-3">
+      
+          <div class="card card-profile shadow mt-3">
+            <div class="row justify-content-center">
+              <div class="col-lg-3 order-lg-2">
+                <div class="card-profile-image mt-5">
+                  <%  if dev&.profile&.avatar&.attached? %>
+                    <%= image_tag dev.profile.avatar, class: "rounded-circle"%>
+                  <% else %>
+                    <%= image_tag "user-img", class: "rounded-circle"%>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+            <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+              <div class="d-flex justify-content-between">
+                <a href="#" class="btn btn-sm btn-info mr-4">Connect</a>
+                <a href="#" class="btn btn-sm btn-default float-right">Message</a>
+              </div>
+            </div>
+            <div class="card-body pt-0 pt-md-4">
+              <div class="text-center">
+                  <h3>
+                    <%= dev.name %><span class="font-weight-light"> </span>
+                  </h3>
+                  <div class="h5 font-weight-300">
+                    <%= dev&.profile&.hometown %>
+                  </div>
+                  <p><%= truncate(strip_tags(dev&.profile&.summary.to_s), length: 80)%> .</p>
+                  <% if dev.profile.present?%>
+                  <%= link_to "Show more" , profile_path(dev.profile)%>
+                  <% end %>
+                </div>
+                <%# <div class="row">
+                  <div class="col">
+                    <div class="card-profile-stats d-flex justify-content-center mt-md-5">
+                      <div>
+                        <span class="heading">22</span>
+                        <span class="description">Friends</span>
+                      </div>
+                      <div>
+                        <span class="heading">10</span>
+                        <span class="description">Photos</span>
+                      </div>
+                      <div>
+                        <span class="heading">89</span>
+                        <span class="description">Comments</span>
+                      </div>
+                    </div>
+                  </div>
+                </div> %>
+              </div>
+            </div>
+          </div>
+      <% end %>
+	</div>
+
+   <div class="developer-card">
         <img src="http://envato.jayasankarkr.in/code/profile/assets/img/profile-6.jpg" class="img img-responsive">
-        <div class="profile-name"><%= dev.name%></div>
+        <div class="profile-name"><#%= dev.name%></div>
           <div class="profile-position">Lorem Ipsum Donor</div>
             <div class="profile-overview">
               <div class="profile-overview">
@@ -30,5 +107,3 @@
           </div>
         </div>
       </div> 
-      <% end %>
-	</div>

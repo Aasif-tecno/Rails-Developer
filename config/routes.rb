@@ -3,6 +3,9 @@ Rails.application.routes.draw do
   resources :jobs
   root 'home#index'
   devise_for :users
+  resources :conversations do
+    resources :messages
+   end
   get '/developers', to: "home#developers"
   mount SimpleDiscussion::Engine => "/forum"
   put 'jobs/:id/publish', to: "jobs#publish", as: "publish"

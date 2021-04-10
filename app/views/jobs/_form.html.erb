@@ -12,68 +12,36 @@
   <% end %>
 
   <div class="card mb-5 border border-dark bg-secondary shadow">
-
-  <div class= "card-body m-4">
-    <input id='step2' type='checkbox'>
-    <input id='step3' type='checkbox'>
-
-    <div id="part1" class="form-group">
-      
-      <div class="panel panel-primary">
-        <div class="panel-heading">
-          <ul id="progressbar">
-            <li class="active" >Job's Details</li>
-            <li>Company Details</li>
-            <li>Final step</li>
-          </ul>
-        </div>
+    <div class= "card-body m-4">
         <%= form.input :title%>
-        <%= form.input :link_to_apply%>
-        <%= form.input :description,as: :rich_text_area %>
+        <%= form.input :link_to_apply, as: :url%>
+        <%= form.input :description,as: :rich_text_area  %>
         <div class="row">
-          <div class="col-sm-6">
+          <div class="col-sm-3">
             <%= form.label :compensation_type %>
             <%= form.select :compensation_type, options_for_select(Job::COMPENSATION_TYPE),  { :include_blank=>false },class: "form-control" %>
           </div>
-          <div class="col-sm-6">
+          <div class="col-sm-3">
             <%= form.label :compensation_range %>
             <%= form.select :compensation_range, options_for_select(Job::COMPENSATION_RANGE), { :include_blank=>false }, { :class => 'form-control' } %>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-4">
+          <div class="col-sm-2">
             <%= form.label :estimated_hours%>
             <%= form.select :estimated_hours, options_for_select(Job::HOURLY_RANGE),  { :include_blank=>false },{:class => 'form-control' } %>
           </div>
-          <div class="col-sm-4">
+          <div class="col-sm-3">
             <%= form.label :years_of_experience %>
             <%= form.select :years_of_experience, options_for_select(Job::YEARS_OF_EXPERIENCE_RANGE), { :include_blank=>false }, class: "form-control"%>
           </div>
-          <div class="col-sm-4">
-            <div class="custom-control custom-checkbox">
+          <div class="col-sm-1">
+            <%# <div class="custom-control custom-checkbox"> %>
               <%= form.check_box :remote, class:"custom-control-input",id:"materialChecked" %>
-              <%= form.label "Is this role Remote" ,class:"custom-control-label", for:"materialChecked"%>
-            </div>
+              <%= form.label "Remote" ,class:"custom-control-label", for:"materialChecked"%>
+            <%# </div> %>
           </div>
         </div>
-        <div class="btn-group btn-group-lg" role="group" aria-label="...">
-          <label for='step2' id="continue-step2" class="continue">
-            <div class="btn btn-default btn-success">Continue</div>
-          </label>
-        </div>
-      </div>
-    </div>
-
-    <div id="part2" class="form-group">
-      <div class="panel panel-primary">
-        <div class="panel-heading">
-           <ul id="progressbar">
-            <li>Job's Details</li>
-            <li class="active">Company Details</li>
-            <li>Final step</li>
-          </ul>
-        </div>
-       <div class="row">
+        
+        <div class="row">
         <div class="col-sm-8">
           <%= form.input :company_name %>
           <%= form.label :company_logo%>
@@ -101,35 +69,6 @@
       </div>
       <%= form.input:company_description ,as: :rich_text_area%>
 
-        <div class="d-flex justify-content-between" role="group" aria-label="...">
-
-          <label for='step2' id="back-step2" class="back">
-            <div class="btn btn-default btn-primary btn-lg" role="button">Back</div>
-          </label>
-
-          <label for='step3' id="continue-step3" class="continue">
-            <div class="btn btn-default btn-success btn-lg" role="button">Continue</div>
-          </label>
-
-        </div>
-      </div>
-    </div>
-
-    <div id="part3" class="form-group">
-      <div class="panel panel-primary">
-        <div class="panel-heading">
-           <ul id="progressbar">
-            <li>Job's Details</li>
-            <li>Company Details</li>
-            <li class="active">Final step</li>
-          </ul>
-        </div>
-       <h3> Payment Details</h3>
-      </div>
-        <div class="d-flex justify-content-between" role="group" aria-label="...">
-          <label for='step3' id="back-step3" class="back">
-            <div class="btn btn-default btn-primary btn-lg">Back</div>
-          </label>
           <label class="continue">
             <%= form.submit "Save", class: "btn btn-success btn-lg"%>
           </label>

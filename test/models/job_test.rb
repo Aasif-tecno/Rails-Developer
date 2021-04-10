@@ -10,7 +10,6 @@
 #  deleted_at          :datetime
 #  estimated_hours     :string
 #  featured            :boolean          default(FALSE)
-#  featured_until      :datetime
 #  headquarters        :string
 #  link_to_apply       :string
 #  price               :integer

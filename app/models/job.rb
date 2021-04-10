@@ -10,7 +10,6 @@
 #  deleted_at          :datetime
 #  estimated_hours     :string
 #  featured            :boolean          default(FALSE)
-#  featured_until      :datetime
 #  headquarters        :string
 #  link_to_apply       :string
 #  price               :integer
@@ -46,12 +45,11 @@ class Job < ApplicationRecord
   has_rich_text :description
   has_rich_text :company_description
   has_one_attached :company_logo
-  validates :title,:company_name,:company_description,:link_to_apply, presence: true
-  validates :description, presence: true, length: { minimum: 30, maximum: 100}
+  validates :title,:description,:company_name,:company_description,:link_to_apply, presence: true
    
   
   #scopes
-  scope :desc, -> { order(created_at: :desc)}
+  scope :desc, -> { order(published_at: :desc)}
   scope :pending, -> { where(status: JOB_STATUSES[:pending]) }
   scope :published, -> { where(status: JOB_STATUSES[:published]) }
   scope :archived, -> { where(status: JOB_STATUSES[:archived]) }
@@ -132,5 +130,12 @@ class Job < ApplicationRecord
       false
     end
   end
-
+  
+  def self.search(search)
+    if search 
+      search.downcase!
+      where(["slug LIKE ? OR LOWER(company_name) LIKE ? ","%#{search}%","%#{search}%"])
+    end
+  end 
+  
 end

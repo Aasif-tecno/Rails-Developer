@@ -14,13 +14,10 @@
   </head>
 
   <body>
-  <div class="main-content">
     <%= render 'shared/navigation' %>
+    <div class="container">
       <%= render 'shared/notices' %>
-      <div class="container">
       <%= yield %>
-      </div>
-      <%= render 'shared/footer' %>
     </div>
   </body>
  

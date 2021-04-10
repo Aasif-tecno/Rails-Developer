@@ -4,8 +4,7 @@ class JobsController < ApplicationController
 
   # GET /jobs or /jobs.json
   def index
-    @jobs = current_user.jobs.with_deleted.desc
-    @job= current_user.jobs.build
+    @jobs = current_user.jobs.desc
   end
 
   # GET /jobs/1 or /jobs/1.json

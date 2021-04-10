@@ -1,216 +1,214 @@
-
-  <div class="main-content">
-    <!-- Top navbar -->
-    
-    <!-- Header -->
-  
-    <!-- Page content -->
-    <div class="mt-5">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
-          <div class="card card-profile shadow">
-            <div class="row justify-content-center">
-              <div class="col-lg-3 order-lg-2">
-                <div class="card-profile-image mt-5">
-                  <%  if current_user.profile.avatar.attached? %>
-                    <%= image_tag current_user.profile.avatar, class: "rounded-circle"%>
-                  <% else %>
-                    <%= image_tag "user-img", class: "rounded-circle"%>
-                  <% end %>
-                </div>
-              </div>
-            </div>
-            <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
-              <div class="d-flex justify-content-between">
-                <a href="#" class="btn btn-sm btn-info mr-4">Connect</a>
-                <a href="#" class="btn btn-sm btn-default float-right">Message</a>
-              </div>
-            </div>
-            
-            <div class="card-body pt-0 pt-md-4">
-            <div class="text-center">
-                <h3>
-                  <%= current_user.name %><span class="font-weight-light">, 27</span>
-                </h3>
-                <div class="h5 font-weight-300">
-                  <i class="ni location_pin mr-2"></i><%= current_user.profile.hometown %>
-                </div>
-                <div class="h5 mt-4">
-                  <i class="ni business_briefcase-24 mr-2"></i>Solution Manager - Creative Tim Officer
-                </div>
-                <div>
-                  <i class="ni education_hat mr-2"></i>University of Computer Science
-                </div>
-                <%# <hr class="my-4">
-                <p>Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music.</p>
-                <a href="#">Show more</a> %>
-              </div>
-              <div class="row">
-                <div class="col">
-                  <div class="card-profile-stats d-flex justify-content-center mt-md-5">
-                    <div>
-                      <span class="heading">22</span>
-                      <span class="description">Friends</span>
-                    </div>
-                    <div>
-                      <span class="heading">10</span>
-                      <span class="description">Photos</span>
-                    </div>
-                    <div>
-                      <span class="heading">89</span>
-                      <span class="description">Comments</span>
+  <div class="mt-5">
+    <% if current_user.developer || current_user.employer %>
+      <% if current_user.developer %>
+        <% if current_user.profile.present? %>
+       
+          <div class="row">
+            <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
+              <div class="card card-profile shadow">
+                <div class="row justify-content-center">
+                  <div class="col-lg-3 order-lg-2">
+                    <div class="card-profile-image mt-5">
+                      <%  if current_user.profile.avatar.present? %>
+                        <%= image_tag current_user.profile.avatar, class: "rounded-circle"%>
+                      <% else %>
+                        <%= image_tag "user-img", class: "rounded-circle"%>
+                      <% end %>
                     </div>
                   </div>
+                </div>
+                <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+                  <div class="d-flex justify-content-between">
+                    <a href="#" class="btn btn-sm btn-info mr-4">Connect</a>
+                    <a href="#" class="btn btn-sm btn-default float-right">Message</a>
+                  </div>
+                </div>
+                <div class="card-body pt-0 pt-md-4">
+                  <div class="text-center">
+                    <h3><%= current_user.name %><span class="font-weight-light"> <%= current_user.profile.dob.year - Date.today.year %></span></h3>
+                    <div class="h5 font-weight-300">
+                      <%= current_user.profile.hometown %>
+                    </div>
+                    <div class="h5 mt-4">
+                      <%= current_user.profile.gender%> &bull;
+                      <%= current_user.profile.marital_status%><br>
+                      <%= current_user.profile.dob%>
+                    </div>
+                    <div>University of Computer Science</div>
+                    <%# <hr class="my-4">
+                    <p>Ryan — the name taken by Melbourne-raised, Brooklyn-based Nick Murphy — writes, performs and records all of his own music.</p>
+                    <a href="#">Show more</a> %>
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <div class="card-profile-stats d-flex justify-content-center mt-md-5">
+                        <div>
+                          <span class="heading">22</span>
+                          <span class="description">Friends</span>
+                        </div>
+                        <div>
+                          <span class="heading">10</span>
+                          <span class="description">Photos</span>
+                        </div>
+                        <div>
+                          <span class="heading">89</span>
+                          <span class="description">Comments</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-8 order-xl-1">
+              <div class="card bg-secondary shadow">
+                <div class="card-header bg-white border-0">
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <h3 class="mb-0">My account</h3>
+                    </div>
+                    <div>
+                      <%= link_to "Messages", conversations_path, class: "btn btn-info"%>
+                      <%= link_to 'Edit Profile', edit_profile_path(current_user.profile) , class: "btn btn-primary" %>
+                      <%= link_to 'Edit Account', edit_user_registration_path, class: "btn btn-default" %>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <h6 class="heading-small text-muted mb-4">ABOUT ME</h6>
+                  <div class="pl-lg-4">
+                    <div  class="mb-3">
+                      <label>Summary</label>
+                      <p class="text-muted"><%= current_user.profile.summary%></p>
+                    </div>
+                    <div class="mb-3">
+                      <p>Key skills</p>
+                      <%= current_user.profile.key_skills%>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-4">
+                        <p>Desired Location</p>
+                        <%= current_user.profile.desired_location%>
+                      </div>
+                      <div class="col-lg-4">
+                        <p>Desired Employment</p>
+                        <%= current_user.profile.desired_employment%>                                         
+                      </div>
+                      <div class="col-lg-4">
+                        <p>Desired Salary</p>
+                        <%= current_user.profile.desired_salary%>                                               
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-6 ">
+                        <p>Language Known</p>
+                        <%= current_user.profile.language_known%>                                         
+                      </div>
+                      <div class="col-lg-6">
+                        <p>Experience</p>
+                        <%= current_user.profile.experience%>
+                      </div>
+                    </div>
+                  </div>                
+                  <hr class="my-4">
+                  <!-- Address -->
+                  <h6 class="heading-small text-muted mb-4">Contact information</h6>
+                  <div class="pl-lg-4">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="form-group focused">
+                          <p>Address</p>
+                          <%= current_user.profile.permanent_address%>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-6">
+                          <p>Hometown</p>
+                          <%= current_user.profile.hometown%>
+                      </div>
+                      <div class="col-lg-6">
+                          <p>Pincode</p>
+                          <%= current_user.profile.pincode%>
+                      </div>
+                    </div>
+                  </div>
+                  <%# <hr class="my-4">
+                  <!-- Description -->
+                  <h6 class="heading-small text-muted mb-4">Contact Inormation</h6>
+                  <div class="pl-lg-4">
+                    <div class="form-group focused">
+                      <label>About Me</label>
+                      <textarea rows="4" class="form-control form-control-alternative" placeholder="A few words about you ...">A beautiful Dashboard for Bootstrap 4. It is Free and Open Source.</textarea>
+                    </div>
+                  </div> %>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="col-xl-8 order-xl-1">
-          <div class="card bg-secondary shadow">
-            <div class="card-header bg-white border-0">
-              <div class="row align-items-center">
-                <div class="col-8">
-                  <h3 class="mb-0">My account</h3>
-                </div>
-                <div class="col-4 text-right">
-                  <%= link_to 'Edit', edit_profile_path(current_user.profile) , class: "btn btn-primary"%>
-                </div>
-              </div>
+        <% else %>
+          Create your profile so that other can see you profile
+          <%= link_to "Profile", new_profile_path, class: "btn btn-primary"%>
+          <%= link_to 'Edit Account', edit_user_registration_path, class: "btn btn-default" %>
+        <% end %>      
+      <% end %>    
+      <% if current_user.employer %> 
+	    <div class="">
+        <div class="">
+          <div class="row align-items-center">
+            <div class="col-8">
+              <h3 class="mb-0">Your Job listing</h3>
             </div>
-            <div class="card-body">
-              <form>
-                <h6 class="heading-small text-muted mb-4">User information</h6>
-                <div class="pl-lg-4">
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <div class="form-group focused">
-                        <label class="form-control-label" for="input-username">Username</label>
-                        <input type="text" id="input-username" class="form-control form-control-alternative" placeholder="Username" value="lucky.jesse">
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-email">Email address</label>
-                        <input type="email" id="input-email" class="form-control form-control-alternative" placeholder="jesse@example.com">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-6">
-                      <div class="form-group focused">
-                        <label class="form-control-label" for="input-first-name">First name</label>
-                        <input type="text" id="input-first-name" class="form-control form-control-alternative" placeholder="First name" value="Lucky">
-                      </div>
-                    </div>
-                    <div class="col-lg-6">
-                      <div class="form-group focused">
-                        <label class="form-control-label" for="input-last-name">Last name</label>
-                        <input type="text" id="input-last-name" class="form-control form-control-alternative" placeholder="Last name" value="Jesse">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <hr class="my-4">
-                <!-- Address -->
-                <h6 class="heading-small text-muted mb-4">Contact information</h6>
-                <div class="pl-lg-4">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group focused">
-                        <label class="form-control-label" for="input-address">Address</label>
-                        <input id="input-address" class="form-control form-control-alternative" placeholder="Home Address" value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09" type="text">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-4">
-                      <div class="form-group focused">
-                        <label class="form-control-label" for="input-city">City</label>
-                        <input type="text" id="input-city" class="form-control form-control-alternative" placeholder="City" value="New York">
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="form-group focused">
-                        <label class="form-control-label" for="input-country">Country</label>
-                        <input type="text" id="input-country" class="form-control form-control-alternative" placeholder="Country" value="United States">
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-country">Postal code</label>
-                        <input type="number" id="input-postal-code" class="form-control form-control-alternative" placeholder="Postal code">
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <hr class="my-4">
-                <!-- Description -->
-                <h6 class="heading-small text-muted mb-4">About me</h6>
-                <div class="pl-lg-4">
-                  <div class="form-group focused">
-                    <label>About Me</label>
-                    <textarea rows="4" class="form-control form-control-alternative" placeholder="A few words about you ...">A beautiful Dashboard for Bootstrap 4. It is Free and Open Source.</textarea>
-                  </div>
-                </div>
-              </form>
+            <div class="col-4 text-right">
+              <%= link_to 'New Job', new_job_path, class: "btn btn-primary" %>    
+              <%= link_to "Jobs", jobs_path, class: "btn btn-primary" %>
+              <%= link_to "Messages", conversations_path, class: "btn btn-info"%>
+              <%= link_to 'Edit Account', edit_user_registration_path, class: "btn btn-default" %>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+    <% @jobs.each do |job| %>
+      <div class="col-md-3">
+        <div class="card card-profile shadow mb-3">
+          <div class="card-header text-center border-0 pt-md-4 pb-0 pb-md-4">
+            <div class="d-flex justify-content-between">
+              <div class="h5 font-weight-300">
+                <%= job.company_name %>
+              </div>
+              <div>
+                <span class="badge badge-<%= job.badge_color%>"><%= job.status%></span>
+              </div>
+            </div>          
+          </div>          
+          <div class="card-body pt-0">
+            <div class="text-center">
+              <h3>
+                <%= link_to job_path(job), class: "text-decoration-none text-dark" do %><%= job.title %> <% end %></span>
+              </h3>
+              
+              <p><%= truncate(strip_tags(job.description.to_s), length: 100) %></p>                          
+              <div class="d-flex justify-content-around">
+               <%= link_to 'Edit', edit_job_path(job) , class: "btn btn-info btn-sm"%>        
+                <% if job.published? %>
+                  <%= link_to 'Unpublish', unpublish_path(job), method: :put , class: "btn btn-warning btn-sm"%>        
+                <% else %>
+                  <%= link_to 'publish', publish_path(job), method: :put , class: "btn btn-success btn-sm"%>        
+                <% end %>
+                <%= link_to 'Destroy', job, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-sm" %>
+            </div>
+                <small class="text-muted">Published at: <%= time_ago_in_words(job.published_at) if job.published? %> ago</small>
+              <hr class="my-2">
+              <%= link_to "Show more", job_path(job) %>
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
-  </div>
-  
-<p id="notice"><%= notice %></p>
-
-<h1>Profiles</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Summary</th>
-      <th>Key skills</th>
-      <th>Experience</th>
-      <th>Desired location</th>
-      <th>Desired employment</th>
-      <th>Desired salary</th>
-      <th>Language known</th>
-      <th>Gender</th>
-      <th>Marital status</th>
-      <th>Dob</th>
-      <th>Hometown</th>
-      <th>Pincode</th>
-      <th>Permanent address</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @profiles.each do |profile| %>
-      <tr>
-        <td><%= profile.summary %></td>
-        <td><%= profile.key_skills %></td>
-        <td><%= profile.experience %></td>
-        <td><%= profile.desired_location %></td>
-        <td><%= profile.desired_employment %></td>
-        <td><%= profile.desired_salary %></td>
-        <td><%= profile.language_known %></td>
-        <td><%= profile.gender %></td>
-        <td><%= profile.marital_status %></td>
-        <td><%= profile.dob %></td>
-        <td><%= profile.hometown %></td>
-        <td><%= profile.pincode %></td>
-        <td><%= profile.permanent_address %></td>
-        <td><%= link_to 'Show', profile %></td>
-        <td><%= link_to 'Edit', edit_profile_path(profile) %></td>
-        <td><%= link_to 'Destroy', profile, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
     <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Profile', new_profile_path %>
+  </div>
+<% end %>
+<% else %>
+</div>
+ Please select either developer or employer to use this site
+  <%= link_to 'Edit Account', edit_user_registration_path, class: "btn btn-default" %>
+<% end %>

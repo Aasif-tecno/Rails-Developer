@@ -6,10 +6,10 @@
     <div class="card-header bg-white border-0">
       <div class="row align-items-center">
         <div class="col-8">
-          <h3 class="mb-0">My Profile</h3>
+          <h3 class="mb-0">Editing Profile</h3>
         </div>
         <div class="col-4 text-right">
-          <%= link_to 'Back', profiles_path, class:"btn btn-primary" %>
+          <%= link_to 'Back', profiles_path, class:"btn btn-default" %>
         </div>
       </div>
     </div>
@@ -20,38 +20,62 @@
           <div class="form-group focused">
             <%= f.input :summary, as: :rich_text_area  %>
           </div>
-          <div class="form-group focused">
-            <%= f.input :key_skills %>
-          </div>
-          <div class="row">
-            <div class="col-lg-4">
-              <div class="form-group focused">
-                <%= f.label :experience  %>
-                <%= f.select :experience, options_for_select(Profile::YEARS_OF_EXPERIENCE_RANGE),  { :include_blank=>false },class: "form-control"  %>
-              </div>
-            </div>
-            <div class="col-lg-4">
-              <div class="form-group">
-                <%= f.label :desired_employment  %>
-                <%= f.select :desired_employment, options_for_select(Profile::DESIRED_EMPLOYMENT),  { :include_blank=>false },class: "form-control"   %>
-              </div>
-            </div>
-            <div class="col-lg-4">
-              <div class="form-group">
-                <%= f.label :desired_salary  %>
-                <%= f.select :desired_salary, options_for_select(Profile::DESIRED_SALARY) ,  { :include_blank=>false },class: "form-control"  %>          
-              </div>
-            </div>
-          </div>
           <div class="row">
             <div class="col-lg-6">
               <div class="form-group focused">
-                <%= f.input :desired_location %>             
+                <%= f.input :key_skills %>
               </div>
             </div>
             <div class="col-lg-6">
               <div class="form-group focused">
                 <%= f.input :language_known %>              
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-3">
+              <div class="form-group">
+                <%= f.label :experience  %>
+                <%= f.select :experience, options_for_select(Profile::YEARS_OF_EXPERIENCE_RANGE),  { :include_blank=>false },class: "form-control"  %>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="form-group">
+                <%= f.label :desired_employment  %>
+                <%= f.select :desired_employment, options_for_select(Profile::DESIRED_EMPLOYMENT),  { :include_blank=>false },class: "form-control"   %>
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="form-group">
+                <%= f.label :desired_salary  %>
+                <%= f.select :desired_salary, options_for_select(Profile::DESIRED_SALARY) ,  { :include_blank=>false },class: "form-control"  %>          
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="form-group focused">
+                <%= f.input :desired_location %>             
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-3">
+              <div class="form-group focused">
+                <%= f.input :facebook_link, placeholder: "http://facebook.com" %>             
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="form-group focused">
+                <%= f.input :twitter_link, placeholder: "http://twitter.com" %>              
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="form-group focused">
+                <%= f.input :linkedin_link, placeholder: "http://linkedin.com" %>              
+              </div>
+            </div>
+            <div class="col-lg-3">
+              <div class="form-group focused">
+                <%= f.input :github_link, placeholder: "http://github.com"%>              
               </div>
             </div>
           </div>
@@ -71,13 +95,18 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-lg-4">
+            <div class="col-lg-2">
               <div class="form-group focused">
                 <%= f.label :gender  %>
                 <%= f.select :gender , options_for_select(Profile::GENDER),  { :include_blank=>false },class: "form-control"  %>        
               </div>
             </div>
-            <div class="col-lg-4">
+            <div class="col-lg-3">
+              <div class="form-group">
+                <%= f.input :phone_no, placeholder: "123 445 7890" %>
+              </div>
+            </div>
+            <div class="col-lg-3">
               <div class="form-group focused">
                 <%= f.label :marital_status  %>
                 <%= f.select :marital_status, options_for_select(Profile::MARITAL_STATUS) ,  { :include_blank=>false },class: "form-control"  %>
@@ -109,8 +138,9 @@
             </div>
             <div class="col-lg-4">
               <div class="form-group focused">
-                <label class="form-control-label" for="input-country">Country</label>
-                <input type="text" id="input-country" class="form-control form-control-alternative" placeholder="Country" >
+                <div class="form-group focused">
+                  <%= f.input :state , placeholder: "State"%>
+                </div>  
               </div>
             </div>
             <div class="col-lg-4">

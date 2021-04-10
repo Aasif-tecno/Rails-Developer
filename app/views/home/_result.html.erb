@@ -1,0 +1,35 @@
+    <% @jobs.each do |job| %>
+      <div class="col-md-4">
+        <div class="card shadow mb-3" id="card-profile">
+          <div class="card-header text-center border-0 pt-md-4 pb-0 pb-md-4">
+            <div class="d-flex justify-content-between">
+              <p class="small text-muted"><%= job.published_at.strftime("%d, %b")  %></p>
+              <div><a href="#" class="btn btn-sm btn-default float-right">Message</a></div>
+            </div>
+          </div>
+           <%= link_to job_path(job), class: "text-decoration-none text-dark" do %>
+          <div class="card-body pt-0">
+          <div class="text-center">
+              <h3>
+               <%= job.title %>
+              </h3>
+              <div class="h5 font-weight-300">
+                <%= job.company_name %>
+              </div>
+              <p><%= truncate(strip_tags(job.description.to_s), length: 50) %></p>
+              <div class="h5 mt-4">
+                  <%= job.compensation_type %>  &bull;   <%= number_to_currency(job.compensation_range) %> <br><%= job.years_of_experience %> years of experience<br>
+                <% if job.remote? %>
+                  Remote job
+                <% end %> <% end %>
+              </div>
+              <div>
+                <%= job.headquarters%> &bull; <%= job.company_website %>
+              </div>
+              <hr class="my-2">
+              <%= link_to "Show more", job_path(job) %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>

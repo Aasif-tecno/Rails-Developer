@@ -1,12 +1,11 @@
 
 <div class="mt-5">
   <div class="d-flex justify-content-between mb-3">
-    <%= link_to 'Back to all jobs', root_path, class: "btn btn-link" %>
+    <%= link_to 'Back to all jobs', root_path, class: "btn btn-default" %>
     <% if author_of(@job) || admin?%>
     <%= link_to 'Edit', edit_job_path(@job), class: "btn btn-warning" %>
     <% end %>
   </div>
-  <div class="container-fluid">
     <div class="row">
       <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
         <div class="card card-profile shadow">
@@ -50,8 +49,8 @@
         </div>
       </div>
       <div class="col-xl-8 order-xl-1">
-        <div class="card bg-secondary shadow">
-          <div class="card-header bg-white border-0">
+        <div class="card bg-white shadow rounded overflow-hidden">
+          <div class="card-header bg-light border-0">
             <div class="row align-items-center">
               <div class="col-8">
                 <h3 class="mb-0"><%= @job.title %></h3>
@@ -62,34 +61,50 @@
             </div>
           </div>
           <div class="card-body">
-            <h6 class="heading-small text-muted mb-3">ABOUT THE ROLE</h6>
-            <div class="pl-lg-4">
-              <%= @job.description %>              
+            <div class="px-4 py-3">
+              <h4 class="mb-0">About the role</h4>
+              <div class="p-2 rounded shadow-sm bg-light">
+                <p class=" mb-0"><%= @job.description %></p>
+              </div>
             </div>
-            <h6 class="heading-small text-muted mb-3 mt-3">COMPENSATION TYPE</h6>
-             <div class="pl-lg-4">
-              <%= @job.compensation_type %>             
+           
+            <div class="px-4 py-3">
+              <h4 class="mb-0">COMPENSATION TYPE</h4>
+              <div class="p-2 rounded shadow-sm bg-light">
+                <p class=" mb-0"><%= @job.compensation_type %> </p>
+              </div>
             </div>
-            <h6 class="heading-small text-muted mb-3 mt-3">COMPENSATION RANGE</h6>
-             <div class="pl-lg-4">
-              <%= number_to_currency(@job.compensation_range) %>
+            
+            <div class="px-4 py-3">
+              <h4 class="mb-0">COMPENSATION RANGE</h4>
+              <div class="p-2 rounded shadow-sm bg-light">
+                <p class=" mb-0"><%= number_to_currency(@job.compensation_range) %></p>
+              </div>
             </div>
-            <h6 class="heading-small text-muted mb-3 mt-3">EXPERIENCE</h6>
-             <div class="pl-lg-4">
-              <%= pluralize(@job.years_of_experience, "year") %> of experience             
+            
+            <div class="px-4 py-3">
+              <h4 class="mb-0">EXPERIENCE</h4>
+              <div class="p-2 rounded shadow-sm bg-light">
+                <p class=" mb-0"><%= pluralize(@job.years_of_experience, "year") %> of experience</p>
+              </div>
             </div>
-            <h6 class="heading-small text-muted mb-3 mt-3">HOURLY RANGE</h6>
-             <div class="pl-lg-4">
-              <%= @job.estimated_hours %>              
+           
+            <div class="px-4 py-3">
+              <h4 class="mb-0">HOURLY RANGE</h4>
+              <div class="p-2 rounded shadow-sm bg-light">
+                <p class=" mb-0"><%= @job.estimated_hours %></p>
+              </div>
             </div>
-            <h6 class="heading-small text-muted mb-3 mt-3">REMOTE</h6>    
-             <div class="pl-lg-4">
-              <%= @job.remote %>              
+            
+            <div class="px-4 py-3">
+              <h4 class="mb-0">REMOTE</h4>
+              <div class="p-2 rounded shadow-sm bg-light">
+                <p class=" mb-0"> <%= @job.remote %></p>
+              </div>
             </div>
             
           </div>
         </div>
       </div>
-    </div>
   </div>
 </div>
