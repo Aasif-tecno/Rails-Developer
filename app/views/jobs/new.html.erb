@@ -1,7 +1,17 @@
-<div class="d-flex justify-content-between mt-4 mb-4">
-  <h3>New Job</h3>
-  <%= link_to 'Back', jobs_path , class: "btn btn-info"%>
-</div>
-
-<%= render 'form', job: @job %>
+<div class="rounded mt-5">
+  <div class="row">
+    <div class="col-lg-2 mb-4 mb-lg-0">
+      <!-- Vertical Menu-->
+        <%= render "shared/verticle_menu"%>
+      <!-- End -->
+    </div>
+    <div class="col-lg-10 mb-5">
+      <div class="d-flex justify-content-between mt-4 mb-4">
+        <h3>New Job</h3>
+        <%= link_to 'Back', jobs_path , class: "btn btn-info"%>
+      </div>
+      <%= render 'form', job: @job %>
+    </div>
+  <div>
+<div>
 

@@ -1,42 +1,36 @@
-<div class="container">
-<div class="row py-5 px-4">
+<!--
+<% if current_user.profile.present? %>
+<div class="row">
   <div class="col-md-12 mx-auto">
-    <!-- Profile widget -->
     <div class="bg-white shadow rounded overflow-hidden">
       <div class="px-4 pt-0 pb-4 cover">
         <div class="media align-items-end profile-head">
           <div class="profile mr-3">
-            <%  if @profile.avatar.present? %>
-              <%= image_tag @profile.avatar,  class:"rounded mb-2 img-thumbnail", style: "width: 200px;" %>
+            <%  if current_user.profile.avatar.present? %>
+              <%= image_tag current_user.profile.avatar,  class:"rounded mb-2 img-thumbnail", style: "width: 200px;" %>
             <% else %>
               <%= image_tag "user-img", class:"rounded mb-2 img-thumbnail" %>
             <% end %>
           </div>
           <div class="media-body mb-5 text-white">
-            <h2 class="mt-0 mb-0"><%= @profile.user.name %></h2>
-            <p class="small mb-0"><%= @profile.user.email %></p>
-            <p class="small mb-0"><%= @profile.gender %> &bull; <%= @profile.marital_status%></p>
-            <p class="small mb-0"><%= @profile.phone_no %></p>
-            <p class="small mb-2"><i class="fas fa-map-marker-alt mr-2"></i><%= @profile.hometown %> , <%= @profile.state%></p>
+            <h2 class="mt-0 mb-0"><%= current_user.profile.user.name %></h2>
+            <p class="small mb-0"><%= current_user.profile.user.email %></p>
+            <p class="small mb-0"><%= current_user.profile.gender %> &bull; <%= current_user.profile.marital_status%></p>
+            <p class="small mb-0"><%= current_user.profile.phone_no %></p>
+            <p class="small mb-2"><i class="fas fa-map-marker-alt mr-2"></i><%= current_user.profile.hometown %> , <%= current_user.profile.state%></p>
             <p class="small mb-4">
-              <a href="<%= @profile.facebook_link%>"><i class="fab fa-facebook mr-2 text-white"></i></a>
-              <a href="<%= @profile.twitter_link%>"><i class="fab fa-twitter mr-2 text-white"></i></a>
-              <a href="<%= @profile.linkedin_link%>"><i class="fab fa-linkedin mr-2 text-white"></i></a>
-              <a href="<%= @profile.github_link%>"><i class="fab fa-github mr-2 text-white"></i></a>
+              <a href="<%= current_user.profile.facebook_link%>"><i class="fab fa-facebook mr-2 text-white"></i></a>
+              <a href="<%= current_user.profile.twitter_link%>"><i class="fab fa-twitter mr-2 text-white"></i></a>
+              <a href="<%= current_user.profile.linkedin_link%>"><i class="fab fa-linkedin mr-2 text-white"></i></a>
+              <a href="<%= current_user.profile.github_link%>"><i class="fab fa-github mr-2 text-white"></i></a>
             </p>
           </div>
         </div>
       </div>
       <div class="bg-light p-4 d-flex justify-content-end text-center">
         <div>
-          <% if user_signed_in? && current_user.id == @profile.user.id || admin?%>
-            <%= link_to 'Edit Profile', edit_profile_path(@profile) , class: "btn btn-primary btn-sm" %>
-            <%= link_to 'Edit Account', edit_user_registration_path, class: "btn btn-default btn-sm" %>
-          <% else %>
-            <%= link_to "Message", conversations_path(sender_id: current_user&.id, recipient_id: @profile.user.id), method: :post , class:"btn btn-default btn-sm"%>
-          <% end %>
-          <a href="#" class="btn btn-info btn-sm">Connect</a>
-        </div>
+        
+				</div>
         <ul class="list-inline mb-0">
           <li class="list-inline-item">
             <h5 class="font-weight-bold mb-0 d-block">215</h5><small class="text-muted"> <i class="fas fa-image mr-1"></i>Photos</small>
@@ -49,60 +43,59 @@
           </li>
         </ul>
       </div>
-      <h3 class="ml-4">User Information</h3>
+      <h3 class="ml-4"> User Information</h3>
       <div class="px-4 py-3">
         <h4 class="mb-0">About</h4>
         <div class="p-2 rounded shadow-sm bg-light">
-          <p class=" mb-0"><%= @profile.summary%></p>
+          <p class=" mb-0"><%= current_user.profile.summary%></p>
         </div>
       </div>
-        <div class="px-4 py-3">
+      <div class="px-4 py-3">
         <div class="row">
           <div class="col-lg-6 ">
             <h4 class="mb-0">Key Skills</h4>
             <div class="p-2 rounded shadow-sm bg-light">
-                <p class=" mb-0"><%= @profile.key_skills%></p>
+                <p class=" mb-0"><%= current_user.profile.key_skills%></p>
             </div>                                           
           </div>
           <div class="col-lg-6">
             <h4 class="mb-0">language known</h4>
             <div class="p-2 rounded shadow-sm bg-light">
-                <p class="mb-0"><%= @profile.language_known%></p>
+                <p class="mb-0"><%= current_user.profile.language_known%></p>
             </div>  
           </div>
-        </div>
-          
+        </div> 
       </div>
       <div class="px-4 py-3">
         <div class="row">
           <div class="col-sm-3">
             <h4 class="mb-0">Desired Location</h4>
             <div class="p-2 rounded shadow-sm bg-light">
-                <p class=" mb-0"><%= @profile.desired_location %></p>
+                <p class=" mb-0"><%= current_user.profile.desired_location %></p>
             </div>
           </div>
           <div class="col-sm-3">
             <h4 class="mb-0">Desired Employment</h4>
             <div class="p-2 rounded shadow-sm bg-light">
-                <p class=" mb-0"><%= @profile.desired_employment %></p>
+                <p class=" mb-0"><%= current_user.profile.desired_employment %></p>
             </div>
           </div>
           <div class="col-sm-3">
             <h4 class="mb-0">Desired Salary</h4>
             <div class="p-2 rounded shadow-sm bg-light">
-                <p class=" mb-0"><%= @profile.desired_salary %></p>
+                <p class=" mb-0"><%= current_user.profile.desired_salary %></p>
             </div>
           </div>
           <div class="col-sm-3">
             <h4 class="mb-0">Experience</h4>
             <div class="p-2 rounded shadow-sm bg-light">
-                <p class="mb-0"><%= @profile.experience%></p>
+                <p class="mb-0"><%= current_user.profile.experience%></p>
             </div>
           </div>
         </div>
       </div><hr>
       <h3 class="ml-4">Work Experience</h3>
-      <%  @profile&.work_experience.each do |work| %>
+      <%  current_user.profile&.work_experience.each do |work| %>
         <div class="px-4">
          #<%= cycle("1","2","3","4")%>
         </div>
@@ -155,7 +148,7 @@
       <div class="px-4 py-3">
         <h4 class="mb-0">Address</h4>
         <div class="p-2 rounded shadow-sm bg-light">
-            <p class=" mb-0"><%= @profile.permanent_address%></p>
+          <p class=" mb-0"><%= current_user.profile.permanent_address%></p>
         </div>
       </div>
       <div class="px-4 py-3">
@@ -163,13 +156,13 @@
           <div class="col-lg-6">
             <h4 class="mb-0">Phone No</h4>
             <div class="p-2 rounded shadow-sm bg-light">
-              <p class=" mb-0"><%= @profile.phone_no%></p>
+              <p class=" mb-0"><%= current_user.profile.phone_no%></p>
             </div>
           </div>
           <div class="col-lg-6">
             <h4 class="mb-0">Email Address</h4>
             <div class="p-2 rounded shadow-sm bg-light">
-              <p class=" mb-0"><%= @profile.user.email%></p>
+              <p class=" mb-0"><%= current_user.profile.user.email%></p>
             </div>
           </div>
         </div>
@@ -179,19 +172,19 @@
           <div class="col-lg-4">
             <h4 class="mb-0">Hometown</h4>
             <div class="p-2 rounded shadow-sm bg-light">
-                <p class=" mb-0"><%= @profile.hometown%></p>
+                <p class=" mb-0"><%= current_user.profile.hometown%></p>
             </div>                                      
           </div>
           <div class="col-lg-4">
             <h4 class="mb-0">State</h4>
             <div class="p-2 rounded shadow-sm bg-light">
-                <p class=" mb-0"><%= @profile.state%></p>
+                <p class=" mb-0"><%= current_user.profile.state%></p>
             </div>                                      
           </div>
           <div class="col-lg-4">
             <h4 class="mb-0">pincode</h4>
             <div class="p-2 rounded shadow-sm bg-light">
-                <p class=" mb-0"><%= @profile.pincode%></p>
+                <p class=" mb-0"><%= current_user.profile.pincode%></p>
             </div>
           </div>
         </div>
@@ -209,5 +202,12 @@
             </div> %>
     </div>
   </div>
-</div>
-</div>
+
+     
+        <% else %>
+          Create your profile so that other can see you profile
+          <%= link_to "Profile", new_profile_path, class: "btn btn-primary"%>
+          <%= link_to 'Edit Account', edit_user_registration_path, class: "btn btn-default" %>
+        <% end %>  
+
+-->

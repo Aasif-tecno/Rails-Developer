@@ -2,17 +2,17 @@
 <%= simple_form_for(@profile) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-  <div class="card bg-secondary shadow mt-5">
-    <div class="card-header bg-white border-0">
+  <div class="card bg-secondary shadow">
+    <%# <div class="card-header bg-white border-0">
       <div class="row align-items-center">
         <div class="col-8">
           <h3 class="mb-0">Editing Profile</h3>
         </div>
         <div class="col-4 text-right">
-          <%= link_to 'Back', profiles_path, class:"btn btn-default" %>
+          <%= link_to 'Back', profiles_path, class:"btn btn-default" 
         </div>
       </div>
-    </div>
+    </div> %>
     <div class="card-body">
       <form>
       <h6 class="heading-small text-muted mb-4">About me</h6>
@@ -80,7 +80,8 @@
             </div>
           </div>
         </div>
-        <h6 class="heading-small text-muted mb-4">User information</h6>
+        <hr class="my-4">
+        <h3 class="heading-small text-muted mb-4">User information</h3>
         <div class="pl-lg-4">
           <div class="row">
             <div class="col-lg-6">
@@ -95,18 +96,14 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-lg-2">
+            <div class="col-lg-4">
               <div class="form-group focused">
                 <%= f.label :gender  %>
                 <%= f.select :gender , options_for_select(Profile::GENDER),  { :include_blank=>false },class: "form-control"  %>        
               </div>
             </div>
-            <div class="col-lg-3">
-              <div class="form-group">
-                <%= f.input :phone_no, placeholder: "123 445 7890" %>
-              </div>
-            </div>
-            <div class="col-lg-3">
+          
+            <div class="col-lg-4">
               <div class="form-group focused">
                 <%= f.label :marital_status  %>
                 <%= f.select :marital_status, options_for_select(Profile::MARITAL_STATUS) ,  { :include_blank=>false },class: "form-control"  %>
@@ -120,13 +117,26 @@
           </div>
         </div>
         <hr class="my-4">
+        <h3 class="heading-small text-muted mb-4 d-flex justify-content-between">
+          Work Experience <%= link_to_add_fields "Add Work Experience", f, :work_experience %></h3>
+          <div class="pl-lg-4">
+            <%= f.fields_for :work_experience do |experinece| %>
+              <%= render "work_experience_fields", f: experinece %>
+            <% end %>
+          </div>
+        <hr class="my-4">
         <!-- Address -->
         <h6 class="heading-small text-muted mb-4">Contact information</h6>
         <div class="pl-lg-4">
           <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-8">
               <div class="form-group focused">
                 <%= f.input :permanent_address %>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="form-group">
+                <%= f.input :phone_no, placeholder: "123 445 7890" %>
               </div>
             </div>
           </div>
@@ -150,7 +160,7 @@
             </div>
           </div>
         </div>
-        <hr class="my-4">
+          
         <%= f.button :submit, class: "btn btn-primary float-right" %>
         
       </form>

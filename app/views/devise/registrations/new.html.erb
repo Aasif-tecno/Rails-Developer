@@ -1,86 +1,112 @@
-<div class="d-flex justify-content-center mt-5 ">
-  <div class="card col-md-6">
-    <div class="card-body">
-    <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
-        <li class="nav-item" role="presentation">
-        <%= link_to "LOGIN", new_user_session_path, class: "nav-link "%>          
-        </li>
-        <li class="nav-item" role="presentation">
-          <%= link_to "SIGNUP", new_user_registration_path, class: "nav-link active" %>
-        </li>
-      </ul>
-      <%# <div class="text-center mb-3">
-        <p>Sign up with:</p>
-        <button type="button" class="btn btn-primary btn-floating mx-1">
-          <i class="fab fa-facebook-f"></i>
-        </button>
+<div class="container">
+  <div class="row py-5 mt-4 align-items-center">
+    <!-- For Demo Purpose -->
+    <div class="col-md-5 pr-lg-5 mb-5 mb-md-0">
+      <img src="https://res.cloudinary.com/mhmd/image/upload/v1569543678/form_d9sh6m.svg" alt="" class="img-fluid mb-3 d-md-block">
+      <h1>Create an Account</h1>
+      <p class="font-italic text-muted mb-0">The internet's number one source for Ruby On Rails Developer.</p>
+      <p class="font-italic text-muted">or find a job.</p>
+    </div>
 
-        <button type="button" class="btn btn-primary btn-floating mx-1">
-          <i class="fab fa-google"></i>
-        </button>
-
-        <button type="button" class="btn btn-primary btn-floating mx-1">
-          <i class="fab fa-twitter"></i>
-        </button>
-
-        <button type="button" class="btn btn-primary btn-floating mx-1">
-          <i class="fab fa-github"></i>
-        </button>
-      </div> %>
-
-      <p class="text-center">or:</p>
-
+    <!-- Registeration Form -->
+    <div class="col-md-7 col-lg-6 ml-auto">
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
-          <div class="form-outline ">
-          <%= f.label :first_name %><br />
-          <%= f.text_field :first_name, autocomplete: "first name", class: "form-control"%>
-        </div>  
-        
-        <div class="form-outline ">
-          <%= f.label :last_name %><br />
-          <%= f.text_field :last_name, autocomplete: "last name", class: "form-control"%>
-        </div>
+        <div class="row">
+          <!-- First Name -->
+          <div class="input-group col-lg-6 mb-4">
+            <div class="input-group-prepend">
+              <span class="input-group-text bg-white px-4 border-md border-right-0">
+                  <i class="fa fa-user text-muted"></i>
+              </span>
+            </div>
+            <%= f.text_field :first_name, autocomplete: "first name", class: "form-control  bg-white border-left-0 border-md", placeholder:"First Name"%>
+          </div>
+          <!-- Last Name -->
+          <div class="input-group col-lg-6 mb-4">
+            <div class="input-group-prepend">
+              <span class="input-group-text bg-white px-4 border-md border-right-0">
+                <i class="fa fa-user text-muted"></i>
+              </span>
+            </div>
+            <%= f.text_field :last_name, autocomplete: "last name", class: "form-control  bg-white border-left-0 border-md", placeholder:"Last Name"%>
+          </div>
+          <!-- Email Address -->
+          <div class="input-group col-lg-12 mb-4">
+            <div class="input-group-prepend">
+              <span class="input-group-text bg-white px-4 border-md border-right-0">
+                <i class="fa fa-envelope text-muted"></i>
+              </span>
+            </div>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control bg-white border-left-0 border-md", placeholder: "Email Address"%>
+          </div>
+          <!-- Password -->
+          <div class="col-12">
+           <% if @minimum_password_length %>
+            <em>(<%= @minimum_password_length %> characters minimum)</em>
+            <% end %>
+          </div>
+          <div class="input-group col-lg-6 mb-4">
+            <div class="input-group-prepend">
+              <span class="input-group-text bg-white px-4 border-md border-right-0">
+                <i class="fa fa-lock text-muted"></i>
+              </span>
+            </div>
+            <%= f.password_field :password, autocomplete: "new-password", class: "form-control bg-white border-left-0 border-md", placeholder: "Password" %>
+          </div>
+          <!-- Password Confirmation -->
+          <div class="input-group col-lg-6 mb-4">
+            <div class="input-group-prepend">
+              <span class="input-group-text bg-white px-4 border-md border-right-0">
+                <i class="fa fa-lock text-muted"></i>
+              </span>
+            </div>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password" , class: "form-control bg-white border-left-0 border-md", placeholder: "Confirm Password"%>
+          </div>
+          <div class="input-group col-lg-6 mb-4">
+            <span><%= f.check_box :developer, class: "form-check-input ml-2"%></span>
+            <label class="form-check-label ml-4">
+              Use as Developer
+            </label>
+          </div>
+          <div class="input-group  col-lg-6 mb-4">
+              <span><%= f.check_box :employer, class: "form-check-input"%></span>
+              <label class="form-check-label">
+                Use as Employer
+              </label>
+          </div>
+          <!-- Submit Button -->
+          <div class="form-group col-lg-12 mx-auto mb-0">
+            <%= f.submit "Create your account", class:"btn btn-primary btn-block py-2" %>
+          </div>
 
-        <div class="form-outline "> 
-          <%= f.label :email %><br />
-          <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control"%>
-        </div>
+          <!-- Divider Text -->
+          <div class="form-group col-lg-12 mx-auto d-flex align-items-center my-4">
+              <div class="border-bottom w-100 ml-5"></div>
+              <span class="px-2 small text-muted font-weight-bold text-muted">OR</span>
+              <div class="border-bottom w-100 mr-5"></div>
+          </div>
 
+          <%# <!-- Social Login -->
+          <div class="form-group col-lg-12 mx-auto">
+              <a href="#" class="btn btn-primary btn-block py-2 btn-facebook">
+                  <i class="fa fa-facebook-f mr-2"></i>
+                  <span class="font-weight-bold">Continue with Facebook</span>
+              </a>
+              <a href="#" class="btn btn-primary btn-block py-2 btn-twitter">
+                  <i class="fa fa-twitter mr-2"></i>
+                  <span class="font-weight-bold">Continue with Twitter</span>
+              </a>
+          </div> %>
 
-        <div class="form-outline">
-          <%= f.label :password %>
-          <% if @minimum_password_length %>
-          <em>(<%= @minimum_password_length %> characters minimum)</em>
-          <% end %><br />
-          <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
-        </div>
+          <!-- Already Registered -->
+          <div class="text-center w-100">
+              <p class="text-muted font-weight-bold">Already Registered? </p>
+            <%= render "devise/shared/links" %>
+          </div>
 
-        <div class="form-outline">
-          <%= f.label :password_confirmation %><br />
-          <%= f.password_field :password_confirmation, autocomplete: "new-password" , class: "form-control"%>
-        </div>
-      <div class="form-check d-flex justify-content-center mb-4">
-        <span><%= f.check_box :developer, class: "form-check-input"%></span>
-        <label class="form-check-label">
-          Use as Developer
-        </label>
-      </div>
-      <div class="form-check d-flex justify-content-center mb-4">
-          <span><%= f.check_box :employer, class: "form-check-input"%></span>
-          <label class="form-check-label">
-            Use as Employer
-          </label>
-      </div>
-
-        <div class="form-group">
-          <%= f.submit "Sign up", class:"btn btn-primary btn-block mb-3" %>
         </div>
       <% end %>
-
-      <%= render "devise/shared/links" %>
-      </div>
     </div>
   </div>
 </div>
-     

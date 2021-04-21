@@ -1,0 +1,31 @@
+# == Schema Information
+#
+# Table name: work_experiences
+#
+#  id           :bigint           not null, primary key
+#  company_name :string
+#  date_from    :date
+#  date_to      :date
+#  description  :string
+#  job_position :string
+#  location     :string
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  profile_id   :integer
+#
+
+one:
+  company_name: MyString
+  job_position: MyString
+  location: MyString
+  date_from: 2021-04-12
+  date_to: 2021-04-12
+  description: MyString
+
+two:
+  company_name: MyString
+  job_position: MyString
+  location: MyString
+  date_from: 2021-04-12
+  date_to: 2021-04-12
+  description: MyString

@@ -59,6 +59,8 @@ class Job < ApplicationRecord
   # contants
   COMPENSATION_TYPE = [
     "Contract",
+    "Freelance",
+    "Part-time",
     "Full-time"
   ]
   

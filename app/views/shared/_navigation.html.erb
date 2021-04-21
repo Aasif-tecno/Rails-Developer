@@ -1,5 +1,6 @@
 <nav class="navbar navbar-custom navbar-expand-lg navbar-dark navbar-fixed-top" id="navbar_top">
   <div class="container">
+    <img src="https://img.icons8.com/color/48/000000/ruby-programming-language.png"  alt="" class="img-fluid mb-3 d-md-block"/>
   <%= link_to "RailsDeveloper", root_path, class: "navbar-brand" %>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -24,6 +25,7 @@
         <% end %>
       <% end %>
       <% if user_signed_in? %>
+      <i class="fas fa-bell"></i>
         <li class="nav-item dropdown">
           <span class="avatar avatar-sm rounded-circle">
           <%  if current_user&.profile&.avatar&.attached? %>
@@ -46,21 +48,22 @@
   </div>
 
 </nav> 
-    <%  if current_page?(root_path) %>
-    <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 200px; ">
-      <!-- Mask -->
-      <span class="mask bg-gradient-default"></span>
-      <!-- Header container-->
-      <div class="container-fluid align-items-center">
-        <div class="row">
-          <div class="col">
-            <h1 class="display-2 text-white">Find Ruby On Rails Developer</h1>
-            <p class="text-white mt-0">The internet's number one source for Ruby On Rails Developer </p>
-              <%= link_to "Find a developer", developers_path, class: "btn btn-primary"%>
-              <%= link_to "Find a job", root_path(anchor: "card-profile"), class: "btn btn-outline-info" %>
-            <p class="text-white mt-2"> or Find a Job of your wish</p>
-          </div>
+<%  if current_page?(root_path) %>
+  <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 200px; ">
+    <!-- Mask -->
+    <span class="mask bg-gradient-default"></span>
+    <!-- Header container-->
+    <div class="container-fluid align-items-center">
+      <div class="row">
+        <div class="col">
+          <h1 class="display-2 text-white">Find Ruby On Rails Developer</h1>
+          <p class="text-white mt-0">The internet's number one source for Ruby On Rails Developer </p>
+            <%# <img src="https://img.icons8.com/plasticine/100/000000/find-matching-job.png"/> %>
+            <%= link_to "Find a developer", developers_path, class: "btn btn-primary"%>
+            <%= link_to "Find a job", root_path(anchor: "card-profile"), class: "btn btn-outline-info" %>
+          <p class="text-white mt-2"> or Find a Job of your wish</p>
         </div>
-      </div> 
+      </div>
     </div> 
-    <% end %>
+  </div> 
+<% end %>

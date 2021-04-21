@@ -35,7 +35,9 @@ class Profile < ApplicationRecord
     has_rich_text :summary
     has_one_attached :avatar
     has_one_attached :resume
-
+    has_many :work_experience
+    accepts_nested_attributes_for :work_experience, allow_destroy: true, reject_if: :all_blank
+  
 
     GENDER = [
         "Male",

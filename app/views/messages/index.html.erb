@@ -1,102 +1,144 @@
-<div class="content-wrapper mt-5">
-  <!-- Row start -->
-  <div class="row gutters">
-    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-      <div class="card chat-card m-0">
+<div class="rounded mt-5">
+  <div class="row">
+    <div class="col-lg-2 mb-4 mb-lg-0">
+      <!-- Vertical Menu-->
+        <%= render "shared/verticle_menu"%>
+      <!-- End -->
+    </div>
+    <div class="col-lg-10">
+      <div class="content-wrapper">
         <!-- Row start -->
-        <div class="row no-gutters">
-          <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-3">
-            <div class="users-container">
-              <div class="chat-search-box">
-                <div class="input-group">
-                  <input class="form-control" placeholder="Search">
-                  <div class="input-group-btn">
-                  <button type="button" class="btn btn-info">
-                    <i class="fa fa-search"></i>
-                  </button>
+        <div class="row gutters">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="card chat-card m-0">
+              <!-- Row start -->
+              <div class="row no-gutters">
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-3 col-3">
+                  <div class="users-container">
+                    <div class="chat-search-box">
+                      <div class="input-group">
+                        <input class="form-control" placeholder="Search">
+                        <div class="input-group-btn">
+                        <button type="button" class="btn btn-default">
+                          <i class="fa fa-search"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <ul class="users">
+                    <% @conversations.each do |conversation| %>
+                      <% if conversation.sender_id == current_user.id || conversation.recipient_id == current_user.id %>
+                        <% if conversation.sender_id == current_user.id %>
+                          <% recipient = User.find(conversation.recipient_id) %>
+                        <% else %>
+                          <% recipient = User.find(conversation.sender_id) %>
+                        <% end %>
+                        <% if @conversation.sender_id == current_user.id %>
+                          <% user = User.find(@conversation.recipient_id) %>
+                        <% else %>
+                          <% user = User.find(@conversation.sender_id) %>
+                        <% end %>
+                        <%= link_to conversation_messages_path(conversation) do %>
+                        <li class="person <%= recipient.id == user.id ? "active-user" : "" %>" data-chat="person1">
+                          <div class="user">
+                            <%  if recipient&.profile&.avatar.present? %>
+                              <%= image_tag recipient.profile.avatar, class: "rounded-circle"%>
+                            <% else %>
+                              <%= image_tag "user-img", class: "rounded-circle"%>
+                            <% end %>
+                            <span class="status online"></span>
+                          </div>
+                          <p class="name-time">
+                            <%= link_to recipient.name,   conversation_messages_path(conversation), class: "name"%>
+                            <span class="time"><%= conversation&.messages&.last&.message_time%></span><br>
+                            <span class="time"><%= conversation&.messages&.last&.body%></span>
+                          </p>
+                        </li>
+                        <% end %> 
+                      <% end %>
+                    <% end %>                                                 
+                  </ul>
                 </div>
+              </div>
+              <div class="col-xl-8 col-lg-8 col-md-8 col-sm-9 col-9">
+                <div class="selected-user">
+                  <% if @conversation.sender_id == current_user.id %>
+                    <% recipient = User.find(@conversation.recipient_id) %>
+                  <% else %>
+                    <% recipient = User.find(@conversation.sender_id) %>
+                  <% end %>
+                  <span>To: <span class="name"><%= recipient.name%></span></span>
+                </div>
+                <div class="chat-container">
+                  <ul class="chat-box chatContainerScroll" id="messages">
+                    <% if @over_ten %>
+                      <div class="text-center">
+                        <%= link_to "Show Previous", '?m=all', class: "btn btn-primary btn-sm" %>
+                      </div>
+                    <% end %>
+                  <% @date = []%>
+                    <% @messages.each do |message| %>
+                      <% if !message.created_at.nil? %>
+                        <% unless @date.include? message.created_at.to_date %>
+                          <% @date << message.created_at.to_date  %>
+                          <div class="text-center mb-3 font-size-4 h5"><span><%= message_date(message) %></span></div>
+                        <% end %>
+                      <% end %>
+                      <% if message.body.present?%>
+                        <% if message.user_id == current_user.id %>
+                        <li class="chat-right">
+                            <div class="chat-hour"><%= message.message_time %>
+                              <%= link_to "Delete", conversation_message_path(@conversation,message), method: :delete, class: "text-danger", data: { confirm: "Are you sure"} %>
+                            <% if message.read %>
+                              <span class="fa fa-check-circle"></span>
+                            <% end %>
+                            </div>
+                              <div class="chat-text"><%= message.body %>
+                              </div>
+                              <div class="chat-avatar">
+                                <%# <%= message.read.inspect %> 
+                                <%# <img src="https://www.bootdey.com/img/Content/avatar/avatar3.png" alt="Retail Admin"> %>
+                              <%# <div class="chat-name"><%= message.user.first_name </div> %>
+                            </div>
+                          </li>
+                        <% else %>
+                          <li class="chat-left">
+                            <div class="chat-avatar"> 
+                              <%# <%= message.read.inspect %> 
+                              <%# <img src="https://www.bootdey.com/img/Content/avatar/avatar3.png" alt="Retail Admin"> %>
+                              <%# <div class="chat-name"><%= message.user.first_name</div> %>
+                            </div>
+                            <div class="chat-text"><%= message.body %></div>
+                            <div class="chat-hour"><%= message.message_time %></div>
+                          </li>									
+                        <% end %>
+                      <% end %>
+                    <% end %>                 
+                  </ul>   
+                </div>
+                <%= form_for [@conversation, @message], html: {class: "ui reply form"} do |f| %>
+                    <div class="input-group p-3">
+                      <%= f.text_field :body, class: "form-control", rows: "3", placeholder: "Type your message here...", autofocus: true%>
+                      <%# <%= f.text_field :user_id, value: current_user.id, type: "hidden" %>
+                      <div class="input-group-btn">
+                        <%= f.submit "Reply", class: "btn btn-default" %>
+                      </div>
+                    </div>
+                  <% end %>
               </div>
             </div>
-            <ul class="users">
-              <% @conversations.each do |conversation| %>
-                <% if conversation.sender_id == current_user.id || conversation.recipient_id == current_user.id %>
-                  <% if conversation.sender_id == current_user.id %>
-                    <% recipient = User.find(conversation.recipient_id) %>
-                  <% else %>
-                    <% recipient = User.find(conversation.sender_id) %>
-                  <% end %>
-                  <%= link_to conversation_messages_path(conversation) do %>
-                  <li class="person" data-chat="person1">
-                    <div class="user">
-                      <%  if recipient&.profile&.avatar.present? %>
-                        <%= image_tag recipient.profile.avatar, class: "rounded-circle"%>
-                      <% else %>
-                        <%= image_tag "user-img", class: "rounded-circle"%>
-                      <% end %>
-                      <span class="status busy"></span>
-                    </div>
-                    <p class="name-time">
-                      <%= link_to recipient.name,   conversation_messages_path(conversation), class: "name"%>
-                      <span class="time">15/02/2019</span>
-                    </p>
-                  </li>
-                  <% end %> 
-                <% end %>
-              <% end %>                                                 
-            </ul>
+            <!-- Row end -->
           </div>
         </div>
-        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-9 col-9">
-          <div class="selected-user">
-            <span>To: <span class="name"></span></span>
-          </div>
-          <div class="chat-container">
-            <ul class="chat-box chatContainerScroll">
-						  <% if @over_ten %>
-							  <%= link_to "Show Previous", '?m=all' %>
-							<% end %>
-							<% @messages.each do |message| %>
-							  <% if message.body.present?%>
-									<% if message.user_id == current_user.id %>
-                  <li class="chat-right">
-											<div class="chat-hour"><%= message.message_time %><span class="fa fa-check-circle"></span></div>
-												<div class="chat-text"><%= message.body %></div>
-												<div class="chat-avatar">
-													<%# <img src="https://www.bootdey.com/img/Content/avatar/avatar3.png" alt="Retail Admin"> %>
-												<%# <div class="chat-name"><%= message.user.first_name </div> %>
-											</div>
-										</li>
-									<% else %>
-										<li class="chat-left">
-											<div class="chat-avatar">
-												<%# <img src="https://www.bootdey.com/img/Content/avatar/avatar3.png" alt="Retail Admin"> %>
-												<%# <div class="chat-name"><%= message.user.first_name</div> %>
-											</div>
-											<div class="chat-text"><%= message.body %></div>
-											<div class="chat-hour"><%= message.message_time %></div>
-										</li>									
-									<% end %>
-							  <% end %>
-							<% end %>                 
-						</ul>   
-					</div>
-           <%= form_for [@conversation, @message], html: {class: "ui reply form"} do |f| %>
-              <div class="input-group p-3">
-                <%= f.text_field :body, class: "form-control", rows: "3", placeholder: "Type your message here..." %>
-                <%# <%= f.text_field :user_id, value: current_user.id, type: "hidden" %>
-                <div class="input-group-btn">
-                  <%= f.submit "Reply", class: "btn btn-default" %>
-                </div>
-              </div>
-            <% end %>
-				</div>
-			</div>
-			<!-- Row end -->
-		</div>
+      </div>
+      <!-- Row end -->
+    </div>
   </div>
-</div>
-  <!-- Row end -->
 </div>
     <!-- Content wrapper end -->
 
 
+<script>
+var messages = document.getElementById("messages");
+    messages.scrollTop = messages.scrollHeight;
+</script>

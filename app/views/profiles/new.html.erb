@@ -1,3 +1,13 @@
-
-<%= render 'form', profile: @profile %>
+<div class="rounded mt-5">
+  <div class="row">
+    <div class="col-lg-2 mb-4 mb-lg-0">
+      <!-- Vertical Menu-->
+        <%= render "shared/verticle_menu"%>
+      <!-- End -->
+    </div>
+    <div class="col-lg-10">
+      <%= render 'form', profile: @profile %>
+    </div>
+  </div>
+</div>
 
